@@ -1,0 +1,33 @@
+#navbar_nav
+    order: 2
+    position: relative
+    right: 0px
+    z-index: 10
+
+    background-color: var(--mainContainerColor)
+
+    display: flex
+    flex-direction: column
+    justify-content: space-evenly
+    align-items: center
+
+    transition: width 100ms ease-in
+
+    @include screen-width-between($phone...)
+        bottom: 0px
+        margin-top: auto
+        width: 100vw
+        height: 10vh
+        border-top: 1px solid var(--mainBorderColor)
+
+    @include screen-width-between($desktop...)
+        top: 0px
+        margin-left: 0.1rem
+        width: 4rem
+        height: 100vh
+
+#navbar_nav:hover
+    @include screen-width-between($desktop...)
+        width: 10rem
+        background: var(--innerTaskColor)
+

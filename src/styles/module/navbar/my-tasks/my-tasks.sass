@@ -1,0 +1,112 @@
+#lists_settings_div
+    position: absolute
+    z-index: 10
+    width: 19rem
+    height: 25rem
+    padding: 0.3rem
+    border: 1px solid var(--secondBorderColor)
+    border-right: 2px solid var(--mainBorderColor)
+    border-bottom: 2px solid var(--mainBorderColor)
+    border-radius: 5px
+    background-color: var(--innerTaskColor)
+    flex-direction: column
+    justify-content: space-evenly
+    align-items: center
+    display: none
+    cursor: default
+
+    @include screen-width-between($phone...)
+        top: -25.85rem
+        left: -1rem
+
+    @include screen-width-between($desktop...)
+        top: -11rem
+        left: -19.5rem
+
+    span
+        display: block
+        margin-bottom: 0.5rem
+        font-weight: bold
+
+    #listing_div
+        margin-top: 1rem
+        width: 90%
+        height: 80%
+        background-color: var(--secondaryColor)
+        border-radius: 5px
+        overflow-y: scroll
+        display: flex
+        flex-direction: column
+        justify-content: start
+        align-items: center
+
+        &::-webkit-scrollbar
+            width: 5px
+            background-color: var(--innerTaskColor)
+
+        &::-webkit-scrollbar-thumb
+            border: 1px solid var(--mainBorderColor)
+
+.each-list-div
+    width: 100%
+    height: 15%
+    background-color: var(--secondaryColor)
+    border-bottom: 1px solid var(--secondBorderColor)
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: center
+    &:hover
+        background-color: var(--innerTaskColor)
+        border-bottom: 1px solid var(--mainBorderColor)
+        cursor: pointer
+
+.each-list-input
+    width: 70%
+    height: 100%
+    padding-left: 2ch
+    background-color: transparent
+    font-size: 1rem
+    font-family: var(--fontFamily)
+    color: var(--fontColor)
+    display: flex
+    justify-content: start
+    align-items: center
+
+.each-list-delete
+    margin-left: auto
+    width: 30%
+    height: 100%
+    border-left: 1px solid var(--secondBorderColor)
+    font-size: 1rem
+    color: var(--delete)
+    display: flex
+    flex-direction: row
+    justify-content: center
+    align-items: center
+
+    &:hover
+        background-color: var(--innerTaskColor)
+        color: var(--clear)
+
+#create_list_button
+    margin: 1rem
+    width: 90%
+    height: 10%
+    border: 1px solid var(--secondBorderColor)
+    border-right: 2px solid var(--secondBorderColor)
+    border-bottom: 2px solid var(--secondBorderColor)
+    background-color: var(--popUpColor)
+    color: var(--fontColor)
+
+    &:hover
+        border-color: var(--mainBorderColor)
+        cursor: pointer
+
+
+
+#my_tasks_div:hover + #lists_settings_div
+    display: flex
+
+#lists_settings_div:hover
+    display: flex

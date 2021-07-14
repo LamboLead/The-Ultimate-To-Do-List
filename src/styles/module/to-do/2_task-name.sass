@@ -1,0 +1,35 @@
+#task_name_div
+    margin-top: 1em
+    margin-bottom: 0.5em
+    margin-inline: auto
+    width: 95%
+    height: 10%
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: center
+
+    #list_name
+        width: 70%
+        height: 90%
+        padding-left: 1em
+
+        border: none
+        border-radius: 5px
+        background-color: var(--mainContainerColor)
+        font-family: var(--fontFamily)
+        font-size: 1.5rem
+        font-weight: bold
+        color: var(--fontColor)
+        transition: border 100ms ease
+
+        &:hover
+            background-color: var(--mainContainerColor)
+            border: 1px solid var(--secondBorderColor)
+            border-right: 2px solid var(--mainBorderColor)
+            border-bottom: 2px solid var(--mainBorderColor)
+
+    svg
+        margin-inline: 1rem
+        width: auto
+        height: 90%

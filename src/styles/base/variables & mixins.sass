@@ -1,0 +1,40 @@
+@mixin screen-width-between($min, $max)
+    @media (min-width: $min) and (max-width: $max)
+        @content
+
+$phone: (min: 0px, max: 500px)
+$desktop: (min: 501px, max: 4000px)
+// $tablet: (min: 501px, max: 768px)
+// $laptop: (min: 769px, max: 1024px)
+// $desktop: (min: 1025px, max: 4000px)
+    
+    
+:root
+    --mainContainerColor: rgba(255, 255, 255, 0.4)
+    --secondaryColor: rgba(255, 255, 255, 0.3)
+    --taskColor: rgba(255, 255, 255, 0.4)
+    --innerTaskColor: rgba(255, 255, 255, 0.6)
+    --popUpColor: rgba(255, 255, 255, 1)
+
+    --mainBorderColor: rgba(50, 50, 50, 1)
+    --secondBorderColor: rgba(90, 90, 90, 0.6)
+
+    --taskEditColor: rgba(255, 255, 0, 0.5)
+    --taskEditBorderColor: rgb(180, 180, 0)
+    --taskCompleteColor: rgba(100, 255, 0, 0.5)
+    --taskCompleteBorderColor: rgb(100, 150, 0)
+
+    --enter: rgb(30, 200, 0)
+    --clear: rgb(220, 30, 30)
+    --edit: rgb(90, 90, 255)
+    --delete: rgb(200, 90, 90)
+
+    --fontColor: black
+    --fontFamily: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+
+    @include screen-width-between($phone...)
+        font-size: 13px
+
+    @include screen-width-between($desktop...)
+        font-size: 15px

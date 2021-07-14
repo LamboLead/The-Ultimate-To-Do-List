@@ -1,0 +1,20 @@
+.is-task-created
+    transition: transform 400ms ease-in, opacity 400ms ease-in
+    transform: translateY(0px)
+    opacity: 1
+
+.is-task-completed
+    border-color: var(--taskCompleteBorderColor) !important
+    background-color: var(--taskCompleteColor) !important
+    transition: border-color 300ms ease-out, background-color 300ms ease-out !important
+
+.is-task-edited
+    border-color: var(--taskEditBorderColor)
+    background-color: var(--taskEditColor)
+    transition: border-color 300ms ease-out, background-color 300ms ease-out
+
+.is-task-deleted
+    transform-origin: center bottom
+    transform: rotateX(90deg)
+    opacity: 0
+    transition: transform 400ms ease-in, opacity 400ms ease-in-out

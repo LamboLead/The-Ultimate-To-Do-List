@@ -1,0 +1,21 @@
+#task_view_div
+    margin: auto
+    width: 95%
+    height: 85%
+    border-radius: 5px
+    background-color: var(--mainContainerColor)
+    display: flex
+    flex-direction: column
+    align-items: center
+
+    overflow: hidden
+    overflow-y: scroll
+
+    &::-webkit-scrollbar
+        width: 0.4rem
+        background: var(--mainContainerColor)
+
+    &::-webkit-scrollbar-thumb
+        border: 1px solid var(--mainBorderColor)
+        background: var(--secondBorderColor)
+        border-radius: 50%

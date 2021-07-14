@@ -1,0 +1,45 @@
+#start_slogan
+    display: block
+    position: relative
+    left: 0px
+
+    width: 100%
+
+    font-size: 4rem
+    font-weight: bold
+    color: white
+
+    transform: scale(0)
+    opacity: 0
+    height: 0
+    margin-block: 0
+    transition: transform 800ms ease, opacity 800ms ease
+    
+#to_do_div
+    border: 1px solid var(--secondBorderColor)
+    border-right: 3px solid var(--mainBorderColor)
+    border-bottom: 3px solid var(--mainBorderColor)
+    border-radius: 10px
+    background-color: var(--secondaryColor)
+
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    align-items: center
+
+    transition: height 1000ms ease
+
+    @include screen-width-between($phone...)
+        margin-top: 2vh
+        width: 95vw
+        height: 85vh
+
+    @include screen-width-between($desktop...)
+        width: 100%
+        height: 100%
+
+#list_div
+    width: 100%
+    height: 88%
+
+    transition: height 1000ms ease

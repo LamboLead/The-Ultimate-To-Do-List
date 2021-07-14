@@ -1,0 +1,112 @@
+// Arrows
+    
+$arrows: (1: -35deg, 2: 35deg)
+    
+#arrow_div
+    position: relative
+
+    width: 100%
+    height: 10%
+
+    border-bottom: 1px solid var(--secondBorderColor)
+
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+    @include screen-width-between($phone...)
+        display: none
+
+@each $arrowNum, $angle in $arrows
+    .arrow#{$arrowNum}-div
+        position: relative
+        width: 3px
+        height: 30%
+        background-color: var(--fontColor)
+        transform: skewX($angle)
+        transition: transform 200ms ease-out
+
+    #navbar_nav:hover .arrow#{$arrowNum}-div
+        transform: skew($angle * -1)
+
+
+// Navbar buttons
+
+#navbar_container_div
+    position: relative
+    margin: auto
+
+    width: 100%
+
+    display: flex
+    flex-direction: column
+    align-items: center
+
+    @include screen-width-between($phone...)
+        height: 100%
+        flex-direction: row
+        justify-content: space-evenly
+
+    @include screen-width-between($desktop...)
+        height: 70%
+        justify-content: center
+
+    .nav-div
+        position: relative
+        width: 100%
+        height: 15%
+
+        font-size: 1.1rem
+        color: var(--fontColor)
+
+        display: flex
+        flex-direction: row
+        justify-content: center
+        align-items: center
+
+        cursor: pointer
+
+        @include screen-width-between($phone...)
+            max-width: 25%
+            height: 100%
+
+        &:hover
+            background-color: var(--innerTaskColor)
+            border-top: 1px solid var(--secondBorderColor)
+            border-bottom: 1px solid var(--secondBorderColor)
+
+.nav-section-div
+    width: 100%
+    height: 100%
+
+    display: flex
+    flex-direction: row
+    justify-content: center
+    align-items: center
+
+    cursor: default
+
+    .text-icon-span
+        position: relative
+        top: 3px
+        display: block
+
+        width: 0px
+        height: 2rem
+
+        font-size: 1.3rem
+        text-align: center
+        white-space: nowrap
+
+        overflow: hidden
+        pointer-events: none
+        transition: width 200ms ease, margin-left 500ms ease
+
+        @include screen-width-between($phone...)
+            display: none
+
+#navbar_nav:hover .text-icon-span
+    @include screen-width-between($desktop...)
+        width: 10ch
+        margin-left: 2%

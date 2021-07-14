@@ -1,0 +1,75 @@
+#task_insert_div
+    position: inherit
+    width: 100%
+    height: 12%
+    border-radius: 5px
+    border-top-right-radius: 0px
+    border-top-left-radius: 0px
+    background-color: var(--mainContainerColor)
+    display: flex
+    flex-direction: row
+    justify-content: center
+    align-items: center
+
+#insert_task
+    margin: 3% 2%
+    max-width: 1000px
+    height: 60%
+    padding-left: 1ch
+    border: none
+    border-radius: 5px
+    background-color: var(--taskColor)
+    font-size: 1.3rem
+    font-family: var(--fontFamily)
+    color: var(--fontColor)
+
+    flex: 1 1 450px
+    transition: border 200ms ease
+
+    &:hover
+        border: 1px solid var(--secondBorderColor)
+        border-right: 2px solid var(--mainBorderColor)
+        border-bottom: 2px solid var(--mainBorderColor)
+
+.task-insert-button
+    margin: 3% 0.5%
+    max-width: 170px
+    width: fit-content
+    min-width: 50px
+    height: 60%
+    border: 1px solid black
+    border-radius: 4px
+    background-color: transparent
+    cursor: pointer
+    flex: 2 3 auto
+    align-self: center
+    display: flex
+    flex-direction: row
+    justify-content: center
+    align-items: center
+    transform: scale(1)
+    transition: transform 300ms ease-in
+
+    &:hover
+        transform: scale(1.05)
+
+        .text-button-span
+            width: 7ch
+
+#clear_input_button
+    border-color: var(--clear)
+    border-right: 2px solid
+    border-bottom: 2px solid
+    background-color: var(--innerTaskColor)
+    color: var(--clear)
+
+#enter_task_button
+    border-color: var(--enter)
+    border-right: 2px solid
+    border-bottom: 2px solid
+    background-color: var(--innerTaskColor)
+    color: var(--enter)
+
+.fa-backspace, .fa-plus-square
+    font-size: 1.5em
+    justify-self: end
