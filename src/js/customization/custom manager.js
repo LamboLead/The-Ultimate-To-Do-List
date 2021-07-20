@@ -1,7 +1,7 @@
-import database from '../storage/database management.js';
-import * as DatabaseInfoModule from '../storage/information management functions.js';
+import database from '../storage/database-management-module.js';
+import * as DatabaseInfoModule from '../storage/information-management-module.js';
 
-import * as BackgroundRenderingModule from './Background images/Rendering module/render background.js';
+import * as BackgroundRenderingModule from './background-images/rendering-module/render background.js.js.js';
 
 import * as ThemeRenderingModule from './Theme/theme functions.js';
 

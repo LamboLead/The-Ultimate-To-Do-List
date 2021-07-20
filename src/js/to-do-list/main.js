@@ -1,16 +1,14 @@
-import * as EventsModule from './event functions.js';
+import * as EventsModule from './event-functions.js';
 
 // Initializing application
 
 EventsModule.initialize();
 
 let listBox = document.getElementById("list_div");
-document.addEventListener("change", () => {
-    EventsModule.watchTasksOrder();
-    setTimeout(() => {
-        EventsModule.saveData();
-    }, 1000);
-});
+let observer = new MutationObserver(EventsModule.saveData);
+const config = {attributes: true, childList: true, subtree: true};
+observer.observe(listBox, config);
+
 
 const pageLoader = document.getElementById("loading_screen_div");
 window.onload = () => {

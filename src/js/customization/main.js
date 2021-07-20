@@ -1,7 +1,7 @@
 import customManager from "./custom manager.js";
-import processUserImages from './Background images/Image processing module/user images.js';
-import previewFetchedImages from './Background images/Image processing module/api images.js';
-import * as RenderSliderModule from './Background images/Rendering module/render slider.js';
+import processUserImages from './background-images/image-processing-module/user-images.js';
+import previewFetchedImages from './background-images/image-processing-module/unsplash-api-images.js';
+import * as RenderSliderModule from './background-images/rendering-module/render slider.js';
 
 // Set everything up
 customManager.initialize();
@@ -12,8 +12,8 @@ const fakeFileButton = document.getElementById("select_files_fake");
 const fileButton = document.getElementById("select_files");
 
 fakeFileButton.addEventListener("click", () => fileButton.click());
-fileButton.addEventListener("change", async (event) => {
-    let files = event.target.files;
+fileButton.addEventListener("change", async () => {
+    let files = fileButton.files;
     let images = await processUserImages(files);
     customManager.setImagesAsBackground(images);
 });
@@ -23,7 +23,7 @@ fileButton.addEventListener("change", async (event) => {
 const groupOfGalleries = document.querySelectorAll(".sample-image-div");
 groupOfGalleries.forEach(gallery => {
     gallery.addEventListener("click", async (event) => {
-        let imageCategory = event.target.querySelector(".sample-image-span").innerHTML;
+        let imageCategory = gallery.querySelector(".sample-image-span").innerHTML;
         previewFetchedImages(imageCategory);
     });
 });
@@ -48,7 +48,7 @@ sliderImagesContainer.addEventListener("click", () => {
 
 const animationSwitch = document.getElementById("switch_animation_div");
 animationSwitch.addEventListener("click", () => {
-    customManager.toggleAnimations();
+  customManager.toggleAnimations();
 });
 
 // Toggle theme
