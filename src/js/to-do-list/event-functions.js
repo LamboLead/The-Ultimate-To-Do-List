@@ -6,13 +6,7 @@
  */
 
 import toDo from './logic/to-do.js';
-import * as RenderingModule from './presentation/rendering functions.js';
-
-// Informative
-
-export function inform() {
-    toDo.displayInformation();
-}
+import * as RenderingModule from './rendering/rendering functions.js';
 
 // Database-related
 

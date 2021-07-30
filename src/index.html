@@ -226,6 +226,7 @@
 	<div id="main_content_div" class="on-start-page">
 		<div id="start_slogan">What will you accomplish today?</div>
 		<div id="to_do_div">
+
 			<div id="list_div">
 				<div id="task_name_div">
 					<input type="text" name="" id="list_name" placeholder="Insert a list name">
@@ -263,7 +264,7 @@
 					</svg>
 				</div>
 				<div id="task_view_div">
-					<div class="task-div fall-insert">
+					<!-- <div class="task-div fall-insert">
 						<img src="assets/SVG/Grip.svg" class="grip-img">
 						<input type="checkbox">
 						<input type="text" class="task-content-input" disabled="disabled">
@@ -271,9 +272,10 @@
 							<i class="far fa-trash-alt"></i>
 							<span class="text-button-span">Delete</span>
 						</button>
-					</div>
+					</div> -->
 				</div>
 			</div>
+
 			<div id="task_insert_div">
 				<input type="text" placeholder="Insert new task!" id="insert_task">
 				<button type="button" id="clear_input_button" class="task-insert-button" title="Clear text">
@@ -287,9 +289,22 @@
 			</div>
 		</div>
 	</div>
+
+	<div id="shadow_screen">
+		<div id="confirmation_box">
+			<span id="confirmation_title">Confirmation box title</span>
+			<span id="confirmation_description">Confirmation box description</span>
+			<div id="confirmation_button_container">
+				<button>Accept</button>
+				<button>Cancel</button>
+			</div>
+		</div>
+	</div>
 	
 	<!-- Scripts -->
 	<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-	<script type="module" src="js/to-do-list/main.js"></script>
+	<script type="module" src="js/storage/database-object.js"></script>
+	<script type="module" src="js/to-do-list/initialization-module.js"></script>
+	<!-- <script type="module" src="js/to-do-list/main.js"></script> -->
 </body>
 </html>

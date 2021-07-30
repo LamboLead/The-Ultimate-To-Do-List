@@ -4,7 +4,7 @@
  * @module To-Do/task
  */
 
-import * as RenderingModule from '../presentation/rendering functions.js';
+import * as RenderingModule from '../rendering/task-rendering-module.js';
 
 /**
  * Class to create a Task
@@ -24,11 +24,12 @@ class Task {
         this.caption = caption;
         this.completed = completed;
         this.order = order;
+
+        // this.render()
     }
 
     /**
      * Renders the task in the DOM by calling renderTask from to-do-rendering-module
-     * @returns {void}
      */
     render() {
         RenderingModule.renderTask(this.id, this.caption, this.completed);

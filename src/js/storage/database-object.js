@@ -9,7 +9,7 @@ const database = await DatabaseModule.openDatabase("The Ultimate To-Do List", 1,
     name: "Lists", keyOptions: {keyPath: "id", autoincrement: false}
   },
   {
-    name: "App information"
+    name: "To-do information"
   },
   {
     name: "Custom preferences"

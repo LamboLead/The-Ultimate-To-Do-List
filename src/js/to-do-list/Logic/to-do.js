@@ -8,7 +8,7 @@
 
 import database from '../../storage/database-object.js';
 import * as DatabaseInfoModule from '../../storage/information-management-module.js';
-import * as RenderingModule from '../presentation/rendering functions.js';
+import * as RenderingModule from '../rendering/to-do-rendering-module.js';
 import Task from './task.js';
 import List from './list.js';
 
@@ -19,134 +19,146 @@ import List from './list.js';
  */
 class ToDo {
 
-    /** @constructs */
-    constructor() {
-        if (!ToDo.instance) {
-            this.currentList = null;
-            this.currentListIndex = 1;
-            ToDo.instance = this;
-        }
-        return ToDo.instance;
-    }
+	/** @constructs */
+	constructor() {
+		if (!ToDo.instance) {
+			this.currentList = null;
+			this.currentListIndex = 1;
+			ToDo.instance = this;
+		}
+		return ToDo.instance;
+	}
 
-    displayInformation() {
-        console.log(this.currentList.id, this.currentListIndex);
-    }
+	/**
+	 * Initializes the application by retrieving all information from the database by calling {@link module:Storage/information-management#retrieveInfo|retrieveInfo} and renders it by calling ...
+	 */
+	async initialize() {
+		console.log("Initializing application");
 
-    // Database & information retrievement-related
+		let currentListId, currentListIndex;
 
-    /**
-     * Initializes the application by retrieving all information from the database by calling {@link module:Storage/information-management#retrieveInfo|retrieveInfo} and renders it by calling {@link module:To-do/rendering#renderListInNavbar|renderListInNavbar}
-     * @returns {Promise<void>}
-     */
-    async initialize() {
+		[currentListId, currentListIndex] = await DatabaseInfoModule.retrieveInfo(database, "To-do information");
+		console.log(`Current list: ${currentListId}. Next list: ${currentListIndex}`);
 
-        console.log("Retrieving information...");
+		if (!currentListId) return;
 
-        // Retrieving current list and index
+		[this.currentList, this.currentListIndex] = [currentListId, currentListIndex];
 
-        let appInfo = await DatabaseInfoModule.retrieveInfo(database, "App information");
-        console.log("Info retrieved:", appInfo);
-        
-        if (appInfo.length === 0) {return}
+		// Render lists in navbar
 
-        this.currentListIndex = appInfo[1];
+		let retrievedLists = sortItems(await DatabaseInfoModule.retrieveInfo(database, "Lists"), "order");
+		retrievedLists.forEach((list) => {
+			let newList = normalizeList(list, false);
+			newList.renderInNavbar();
+		});
 
-        // Retrieving all lists
+		// Render list in list view
+		this.switchToList(currentListId);
 
-        let retrievedLists = await DatabaseInfoModule.retrieveInfo(database, "Lists");
-        let orderedLists = retrievedLists.sort((l1, l2) => {
-            if (l1.order < l2.order) {
-                return -1;
-            } else {
-                return 1;
-            }
-        });
-        orderedLists.forEach(list => {
-            RenderingModule.renderListInNavbar(list.id, list.name);
-        });
+		RenderingModule.showStartPage(false);
+	}
 
-        // -> Retrieving current list
-        this.switchToList(appInfo[0]);
-    }
+	/**
+		* Saves the app information into the database by calling the saveInfo method from {@link module: information-management}
+		*/
+	saveData() {
+		if (!this.currentList) {return}
+		DatabaseInfoModule.saveInfo(database, "Lists", {value: this.currentList});
+		DatabaseInfoModule.saveInfo(database, "To-do information", {key: "currentList", value: this.currentList.id});
+		DatabaseInfoModule.saveInfo(database, "To-do information", {key: "currentListIndex", value: this.currentListIndex});
+	}
 
-    /**
-     * Saves the actual information into the database by calling the saveInfo method from {@link module: information-management}
-     * @returns {void}
-     */
-    saveData() {
-        if (!this.currentList) {return}
-        DatabaseInfoModule.saveInfo(database, "Lists", {value: this.currentList});
-        DatabaseInfoModule.saveInfo(database, "App information", {key: "currentList", value: this.currentList.id});
-        DatabaseInfoModule.saveInfo(database, "App information", {key: "currentListIndex", value: this.currentListIndex});
-    }
+	/**
+	 * Creates a new list, saves it into the database and renders it.
+	 */
+	createList() {
+		this.currentList = new List(
+				`list${this.currentListIndex}`,
+				`My to-do list #${this.currentListIndex}`
+		);
+		this.currentListIndex++;
+		
+		this.currentList.renderInNavbar();
+		this.currentList.render();
 
-    // List methods
+		RenderingModule.showStartPage(false);
+	}
 
-    /**
-     * Creates a new list, saves it into the database and renders it.
-     */
-    createList() {
-        let newList = new List(
-            `list${this.currentListIndex}`,
-            `My to-do list #${this.currentListIndex}`,
-            [,,],
-            this.currentListIndex
-        );
-        this.currentList = newList;
-        this.currentListIndex++;
+	/**
+	 * Removes the specified list from the DOM, renders another one, and deletes the specified list from the database
+	 * @param {string} listId The id of the deleted list
+	 */
+	async deleteList(listId) {
 
-        DatabaseInfoModule.saveInfo(database, "App information", {key: "currentList", value: this.currentList.id});
-        DatabaseInfoModule.saveInfo(database, "App information", {key: "currentListIndex", value: this.currentListIndex});
+			let listsArr = await DatabaseInfoModule.retrieveInfo(database, "Lists");
+			let nextList = listsArr.find(list => list.id !== listId);
+			
+			if (!nextList) {
+					RenderingModule.showStartPage(true);
+					DatabaseInfoModule.deleteInfo(database, "App information", {key: "currentList"});
+					DatabaseInfoModule.deleteInfo(database, "App information", {key: "currentListIndex"});
+					this.currentList = null;
+					this.currentListIndex = 1;
+			} else {
+					this.switchToList(nextList.id);
+			}
 
-        newList.render();
-    }
+			// Delete list from database
+			DatabaseInfoModule.deleteInfo(database, "Lists", {key: listId});
+	}
 
-    /**
-     * Removes the specified list from the DOM, renders another one, and deletes the specified list from the database
-     * @param {string} listId The id of the deleted list
-     * @returns {Promise<void>}
-     */
-    async deleteList(listId) {
+	/**
+	 * Updates the name of the list to the specified new one
+	 * @function updateListName
+	 * @param {string} newListName New name of the list
+	 */
+	updateListName(newListName) {
+		this.currentList.name = newListName;
+		this.currentList.renderInNavbar();
+	}
 
-        let listsArr = await DatabaseInfoModule.retrieveInfo(database, "Lists");
-        let nextList = listsArr.find(list => list.id !== listId);
-        
-        if (!nextList) {
-            RenderingModule.showStartPage(true);
-            DatabaseInfoModule.deleteInfo(database, "App information", {key: "currentList"});
-            DatabaseInfoModule.deleteInfo(database, "App information", {key: "currentListIndex"});
-            this.currentList = null;
-            this.currentListIndex = 1;
-        } else {
-            this.switchToList(nextList.id);
-        }
+	/**
+	 * Searches for the specified list in the database and renders it in the DOM
+	 * @param {string} listId The id of the selected list
+	 */
+	async switchToList(listId) {
+		let retrievedList = (await DatabaseInfoModule.retrieveInfo(database, "Lists", {query: listId}))[0];
+		
+		this.currentList = normalizeList(retrievedList, true);
+		this.currentList.render();
+	}
+}
 
-        // Delete list from database
-        DatabaseInfoModule.deleteInfo(database, "Lists", {key: listId});
-    }
+/**
+ * Orders an array of objects according to the specified parameter
+ * @function sortItems
+ * @param {Array<Object>} itemsArr The array of items to sort
+ * @param {string} orderBy Parameter to sort the array by
+ * @returns {Array<Object>} Array with its items sorted
+ */
+function sortItems(itemsArr, orderBy) {
+	return itemsArr.sort((item1, item2) => {
+		if (item1[orderBy] < item2[orderBy]) return -1;
+		return 1;
+	})
+}
 
-    /**
-     * Searches for the specified list in the database and renders it in the DOM
-     * @param {string} listId The id of the selected list
-     * @returns {Promise<void>}
-     */
-    async switchToList(listId) {
-        let retrievedList = await DatabaseInfoModule.retrieveInfo(database, "Lists", {query: listId});
-        retrievedList = retrievedList[0];
-
-        let newList = new List(retrievedList.id, retrievedList.name, retrievedList.createdAt, retrievedList.order, retrievedList.currentTaskIndex);
-        retrievedList.tasks.forEach(task => {
-            let newTask = new Task(task.id, task.caption, task.completed, task.order);
-            newList.tasks.push(newTask);
-        });
-
-        this.currentList = newList;
-        this.currentList.render();
-
-        DatabaseInfoModule.saveInfo(database, "App information", {key: "currentList", value: this.currentList.id});
-    
-    }
+/**
+ * Normalizes retrieved lists from database by creating new ones.
+ * @function normalizeList
+ * @param {{id: string, name: string, createdAt: Date, order: number, currentTaskIndex: number, tasks: Array}} previousList
+ * @param {boolean} fullNormalization Indicator to normalize list completely (with tasks) or partially (without tasks)
+ * @returns {Object}
+ */
+function normalizeList(previousList, fullNormalization) {
+	let newList = new List(previousList.id, previousList.name, previousList.createdAt, previousList.order, previousList.currentTaskIndex);
+	if (fullNormalization) {
+		previousList.tasks.forEach((task) => {
+			let newTask = new Task(task.id, task.caption, task.completed, task.order);
+			newList.tasks.push(newTask);
+		});
+	}
+	return newList;
 }
 
 const toDo = new ToDo();

@@ -1,0 +1,33 @@
+* To-do list
+
+-> Investigate about functional programming examples to handle user input and select HTML elements.
+- Result: For now, use the procedural/functional way of doing things: Define html elements and add event listeners to them.
+
+-> Handle user input properly (task insert, update list name & update task caption)
+
+-> Clear input element with button
+-> Enter task with button
+
+-> Delete tasks
+-> Edit tasks
+-> Check tasks
+-> Reorder tasks
+- Result: All right!
+
+-> Create new list
+-> Switch to certain list
+-> Delete list (add confirmation window)
+-> Update list name
+-> Reorder lists
+
+-> Add error handling for input (Add a fadeout for the rest of the page but the input element, and clear it if the input is OK).
+
+* Customization
+
+-> Toggle animations properly
+
+-> Set user images as background
+-> Set API images as background
+-> Save images in database & retrieve them from database
+
+-> Toggle theme
