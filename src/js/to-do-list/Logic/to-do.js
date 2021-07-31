@@ -89,22 +89,25 @@ class ToDo {
 	 * @param {string} listId The id of the deleted list
 	 */
 	async deleteList(listId) {
+		
+		// Find another list to render
+		let listsArr = await DatabaseInfoModule.retrieveInfo(database, "Lists");
+		let nextList = listsArr.find((list) => list.id !== listId);
 
-			let listsArr = await DatabaseInfoModule.retrieveInfo(database, "Lists");
-			let nextList = listsArr.find(list => list.id !== listId);
-			
-			if (!nextList) {
-					RenderingModule.showStartPage(true);
-					DatabaseInfoModule.deleteInfo(database, "App information", {key: "currentList"});
-					DatabaseInfoModule.deleteInfo(database, "App information", {key: "currentListIndex"});
-					this.currentList = null;
-					this.currentListIndex = 1;
-			} else {
-					this.switchToList(nextList.id);
-			}
+		if (!nextList) {
+			RenderingModule.showStartPage(true);
+			DatabaseInfoModule.deleteInfo(database, "To-do information", {key: "currentList"});
+			DatabaseInfoModule.deleteInfo(database, "To-do information", {key: "currentListIndex"});
+			this.currentList = null;
+			this.currentListIndex = 1;
+		} else {
+			this.switchToList(nextList.id);
+		}
+		// Remove list from navbar
+		RenderingModule.removeListFromNavbar(listId);
 
-			// Delete list from database
-			DatabaseInfoModule.deleteInfo(database, "Lists", {key: listId});
+		// Delete list from database
+		DatabaseInfoModule.deleteInfo(database, "Lists", {key: listId});
 	}
 
 	/**

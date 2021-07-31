@@ -500,6 +500,10 @@ a:hover {
   pointer-events: none;
 }
 
+#my_tasks_div {
+  opacity: 0.5;
+}
+
 #lists_settings_div {
   position: absolute;
   z-index: 10;
@@ -613,10 +617,6 @@ a:hover {
 #create_list_button:hover {
   border-color: var(--mainBorderColor);
   cursor: pointer;
-}
-
-#my_tasks_div:hover + #lists_settings_div {
-  display: flex;
 }
 
 #lists_settings_div:hover {
@@ -1220,7 +1220,9 @@ a:hover {
   border-right: 3px solid var(--mainBorderColor);
   border-bottom: 3px solid var(--mainBorderColor);
   border-radius: 5px;
-  transform: translateY(50%);
+  pointer-events: none;
+  transform: translateY(50%) scale(0);
+  transition: transform 500ms ease;
 }
 @media (min-width: 501px) and (max-width: 4000px) {
   #confirmation_box {
@@ -1303,6 +1305,13 @@ a:hover {
   transition: transform 400ms ease-in, opacity 400ms ease-in-out;
 }
 
+.is-functionality-active {
+  opacity: 1 !important;
+}
+.is-functionality-active:hover + #lists_settings_div {
+  display: flex;
+}
+
 .on-start-page #start_slogan {
   transform: scale(1) !important;
   opacity: 0.7 !important;
@@ -1366,6 +1375,11 @@ a:hover {
   z-index: 21;
   transition: transform 500ms ease-in;
   transform: scale(1.05);
+}
+
+.is-confirmation-required {
+  transform: translateY(50%) scale(1) !important;
+  pointer-events: all !important;
 }
 
 /*# sourceMappingURL=main-styles.css.map */

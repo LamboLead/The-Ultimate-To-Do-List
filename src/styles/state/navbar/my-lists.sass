@@ -1,9 +1,15 @@
 .is-list-selected
-    border-left: 4px solid var(--mainBorderColor)
-    background-color: var(--popUpColor)
+	border-left: 4px solid var(--mainBorderColor)
+	background-color: var(--popUpColor)
     
 .is-list-deleted
-    transform-origin: center bottom !important
-    transform: rotateX(90deg) !important
-    opacity: 0 !important
-    transition: transform 400ms ease-in, opacity 400ms ease-in-out
+	transform-origin: center bottom !important
+	transform: rotateX(90deg) !important
+	opacity: 0 !important
+	transition: transform 400ms ease-in, opacity 400ms ease-in-out
+
+.is-functionality-active
+	opacity: 1 !important
+	&:hover
+		+ #lists_settings_div
+			display: flex

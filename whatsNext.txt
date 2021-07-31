@@ -15,8 +15,14 @@
 - Result: All right!
 
 -> Create new list
+- Done!
 -> Switch to certain list
+- Done!
 -> Delete list (add confirmation window)
+- Done!
+
+- IMPORTANT MESSAGE: Start working on the shadow and confirmation box functionalities in the 'shadow' branch.
+
 -> Update list name
 -> Reorder lists
 

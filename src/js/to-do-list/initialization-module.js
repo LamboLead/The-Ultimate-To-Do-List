@@ -129,6 +129,25 @@ export function switchToList(listId) {
   ToDo.switchToList(listId);
 }
 
+
+import * as ToDoRenderingModule from '../to-do-list/rendering/to-do-rendering-module.js';
+/**
+ * Deletes the specified list if the user states so in the confirmation box
+ * @param {string} listId Id of the specified list
+ */
+export async function deleteList(listId, listName) {
+  let returnValue = await ToDoRenderingModule.showConfirmationDialog(
+    "Delete list",
+    `Do you want to delete '${listName}'?`,
+    [
+      {buttonName: "Delete list", returnValue: true},
+      {buttonName: "Cancel", returnValue: false}
+    ]
+  );
+  if (!returnValue) return;
+  ToDo.deleteList(listId);
+}
+
 let arrow = document.getElementById("arrow_div");
 arrow.addEventListener("click", () => {
   console.log(ToDo.currentListIndex);

@@ -1,4 +1,5 @@
 import * as InitializationModule from '../initialization-module.js';
+import * as ToDoRenderingModule from './to-do-rendering-module.js';
 
 /**
  * Updates the name of the list in its corresponding element in the DOM
@@ -11,8 +12,7 @@ export function setMainListName(newListName) {
 }
 
 export function setNavbarListName(listId, newListName) {
-  let listInput = document.getElementById(listId).querySelector(".each-list-input");
-  console.log(listInput);
+  let listInput = document.querySelector(`[data-list-id=${listId}]`).querySelector(".each-list-input");
   listInput.innerHTML = newListName;
   listInput.title = `Switch to '${newListName}'`;
 }
@@ -25,7 +25,8 @@ export function setNavbarListName(listId, newListName) {
  */
 export function renderListInNavbar(listId, newListName) {
   // Check if list already exists
-  let list = document.getElementById(listId);
+  let listsdiv = document.getElementById("listing_div");
+  let list = document.querySelector(`[data-list-id=${listId}]`);
   if (list) {
     setNavbarListName(listId, newListName);
     return;
@@ -37,7 +38,7 @@ export function renderListInNavbar(listId, newListName) {
   let newList = document.createElement("div");
   newList.classList.add("each-list-div");
   newList.title = `Switch to '${newListName}'`;
-  newList.id = listId;
+  newList.setAttribute("data-list-id", listId);
 
   let newListInput = document.createElement("div");
   newListInput.classList.add("each-list-input");
@@ -50,9 +51,10 @@ export function renderListInNavbar(listId, newListName) {
   listDelete.innerHTML = "<i class='far fa-trash-alt'></i>";
   listDelete.classList.add("each-list-delete");
   listDelete.title = "Delete list";
-  listDelete.addEventListener("click", event => {
-      // let listId = event.target.parentElement.id;
-      // EventsModule.deleteList(listId);
+  listDelete.addEventListener("click", () => {
+    let list = document.querySelector(`[data-list-id=${listId}]`);
+    let listName = list.querySelector(".each-list-input").innerHTML;
+    InitializationModule.deleteList(listId, listName);
   });
 
   newList.append(newListInput, listDelete);
