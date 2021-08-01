@@ -1,6 +1,13 @@
 .is-list-selected
-	border-left: 4px solid var(--mainBorderColor)
-	background-color: var(--popUpColor)
+	position: relative
+	&::before
+		position: absolute
+		// left: 7px
+		content: ""
+		width: 5px
+		height: 100%
+		background-color: var(--enter)
+	// background-color: var(--popUpColor)
     
 .is-list-deleted
 	transform-origin: center bottom !important

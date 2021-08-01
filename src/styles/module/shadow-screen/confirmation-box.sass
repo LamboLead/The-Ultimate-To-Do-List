@@ -55,6 +55,18 @@
   justify-content: space-evenly
   align-items: center
 
-  button 
+  button
     width: 40%
-    height: 50%   
+    height: 50%
+
+    border: 1px solid var(--mainBorderColor)
+    border-right-width: 2px
+    border-bottom-width: 2px
+    border-radius: 3px
+
+    font-size: 1.1rem
+    cursor: pointer
+    transition: transform 200ms ease
+    transform: scale(1)
+    &:hover
+      transform: scale(1.05)

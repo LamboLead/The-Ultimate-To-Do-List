@@ -171,7 +171,6 @@ a:hover {
   align-items: center;
   transition: top 400ms ease;
   background-color: #000028;
-  display: none;
 }
 
 #pop_up_div {
@@ -571,7 +570,13 @@ a:hover {
 .each-list-div:hover {
   background-color: var(--innerTaskColor);
   border-bottom: 1px solid var(--mainBorderColor);
-  cursor: pointer;
+}
+
+.grip-list {
+  margin-inline: 0.5ch;
+  color: var(--secondBorderColor);
+  font-size: 1rem;
+  cursor: grab;
 }
 
 .each-list-input {
@@ -585,6 +590,9 @@ a:hover {
   display: flex;
   justify-content: start;
   align-items: center;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow-x: hidden;
 }
 
 .each-list-delete {
@@ -598,6 +606,7 @@ a:hover {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 .each-list-delete:hover {
   background-color: var(--innerTaskColor);
@@ -1043,19 +1052,17 @@ a:hover {
   border-right: 2px solid var(--mainBorderColor);
   border-bottom: 2px solid var(--mainBorderColor);
 }
-.task-div .grip-img {
-  margin-inline: 1.5ch;
-  z-index: 50;
-  width: auto;
-  height: 40%;
-  background-color: blue;
-  opacity: 1;
+.task-div .grip-task {
+  margin-inline: 1rem;
+  font-size: 1.1rem;
+  color: var(--secondBorderColor);
   cursor: grab;
 }
 .task-div [type=checkbox] {
   margin-right: 1.5ch;
   width: 1.3rem;
   height: 1.3rem;
+  cursor: pointer;
 }
 .task-div .task-content-input {
   max-width: 800px;
@@ -1266,6 +1273,17 @@ a:hover {
 #confirmation_button_container button {
   width: 40%;
   height: 50%;
+  border: 1px solid var(--mainBorderColor);
+  border-right-width: 2px;
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 200ms ease;
+  transform: scale(1);
+}
+#confirmation_button_container button:hover {
+  transform: scale(1.05);
 }
 
 .is-appearing {
@@ -1294,8 +1312,14 @@ a:hover {
 }
 
 .is-list-selected {
-  border-left: 4px solid var(--mainBorderColor);
-  background-color: var(--popUpColor);
+  position: relative;
+}
+.is-list-selected::before {
+  position: absolute;
+  content: "";
+  width: 5px;
+  height: 100%;
+  background-color: var(--enter);
 }
 
 .is-list-deleted {
@@ -1372,8 +1396,9 @@ a:hover {
 }
 
 .is-element-highlighted {
-  z-index: 21;
+  z-index: 51 !important;
   transition: transform 500ms ease-in;
+  box-shadow: var(--clear) 0px 0px 10px 5px;
   transform: scale(1.05);
 }
 

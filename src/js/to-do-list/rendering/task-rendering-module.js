@@ -21,15 +21,8 @@ export function renderTask(taskId, taskCaption, isTaskCompleted) {
   });
 
   // Task grip
-  let newGrip = document.createElement("img");
-  newGrip.src = '../../../../src/assets/SVG/Grip.svg';
-  newGrip.classList.add("grip-img");
-  // newGrip.addEventListener("mouseup", () => {
-  //   InitializationModule.watchTaskOrder();
-  // });
-  // newGrip.addEventListener("mouseup", () => {
-  //     EventsModule.watchTaskOrder();
-  // });
+  let newGrip = document.createElement("i");
+  newGrip.classList.add("fas", "fa-grip-lines", "grip-task")
 
   // Task checkbox
   let newCheck = document.createElement("input");

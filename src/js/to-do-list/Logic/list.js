@@ -110,6 +110,7 @@ class List {
 		// Render list
 		RenderingModule.removeExistingTasks();
 		RenderingModule.setMainListName(this.name);
+		RenderingModule.setListAsActive(this.id);
 
 		// Render each task
 		let orderedList = sortItems(this.tasks, "order");

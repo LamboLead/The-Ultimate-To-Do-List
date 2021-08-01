@@ -1,6 +1,16 @@
 import * as EventHandlingModule from '../event-handling-module.js';
 import toDo from './logic/to-do.js';
 import ToDo from './logic/to-do.js';
+import * as StateRenderingModule from '../to-do-list/rendering/state-rendering-module.js';
+
+// Remove page loader
+
+const pageLoader = document.getElementById("loading_screen_div");
+window.onload = () => {
+    setTimeout(() => {
+        pageLoader.style.setProperty("top", "-100vh");
+    }, 3500);
+}
 
 // Initialize application
 
@@ -9,7 +19,7 @@ ToDo.initialize();
 // Set handler for saving information
 
 let onSave = false;
-const listBox = document.getElementById("list_div");
+const listContainer = document.getElementById("list_div");
 const saveObserver = new MutationObserver(() => {
   if (!onSave) {
     onSave = true;
@@ -19,22 +29,31 @@ const saveObserver = new MutationObserver(() => {
     }, 1000);
   }
 });
-saveObserver.observe(listBox, {
+saveObserver.observe(listContainer, {
   attributes: true,
   childList: true,
   subtree: true
 });
 
-// Set rearrange tasks handler - Drag & drop
+// Set handler for rearrange tasks
 
 const taskBox = document.getElementById("task_view_div");
 new Sortable.create(taskBox, {
   animation: 150,
   chosenClass: "selected",
   ghostClass: "ghosted",
-  handle: ".grip-img"
+  handle: ".grip-task"
 });
 
+// Set handler for rearrange lists
+
+const listBox = document.getElementById("listing_div");
+new Sortable.create(listBox, {
+  animation: 300,
+  chosenClass: "selected",
+  // ghostClass: "ghosted",
+  handle: ".grip-list"
+});
 
 // <- <- <- Handle user events -> -> ->
 
@@ -60,7 +79,7 @@ createTaskButton.addEventListener("click", () => {
  * Creates a new task inside the current list with the specified caption
  * @param {string} taskName Caption of the new task
  */
- function createTask(taskName) {
+function createTask(taskName) {
   console.log(taskName);
   if (!ToDo.currentList) {
     ToDo.createList();
@@ -129,19 +148,17 @@ export function switchToList(listId) {
   ToDo.switchToList(listId);
 }
 
-
-import * as ToDoRenderingModule from '../to-do-list/rendering/to-do-rendering-module.js';
 /**
  * Deletes the specified list if the user states so in the confirmation box
  * @param {string} listId Id of the specified list
  */
 export async function deleteList(listId, listName) {
-  let returnValue = await ToDoRenderingModule.showConfirmationDialog(
+  let returnValue = await StateRenderingModule.showConfirmationDialog(
     "Delete list",
     `Do you want to delete '${listName}'?`,
     [
-      {buttonName: "Delete list", returnValue: true},
-      {buttonName: "Cancel", returnValue: false}
+      {buttonName: "Delete list", color: "var(--clear)", returnValue: true},
+      {buttonName: "Cancel", color: "default", returnValue: false}
     ]
   );
   if (!returnValue) return;

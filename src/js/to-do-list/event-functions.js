@@ -45,7 +45,7 @@ export function newTask(taskName) {
     console.log("Creating task...");
     if (!toDo.currentList) {
         toDo.createList();
-        RenderingModule.showStartPage(false);
+        StateRenderingModule.showStartPage(false);
     }
     toDo.currentList.createTask(taskName);
 }

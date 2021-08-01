@@ -9,6 +9,7 @@
 import database from '../../storage/database-object.js';
 import * as DatabaseInfoModule from '../../storage/information-management-module.js';
 import * as RenderingModule from '../rendering/to-do-rendering-module.js';
+import * as StateRenderingModule from '../rendering/state-rendering-module.js';
 import Task from './task.js';
 import List from './list.js';
 
@@ -55,7 +56,7 @@ class ToDo {
 		// Render list in list view
 		this.switchToList(currentListId);
 
-		RenderingModule.showStartPage(false);
+		StateRenderingModule.showStartPage(false);
 	}
 
 	/**
@@ -81,7 +82,7 @@ class ToDo {
 		this.currentList.renderInNavbar();
 		this.currentList.render();
 
-		RenderingModule.showStartPage(false);
+		StateRenderingModule.showStartPage(false);
 	}
 
 	/**
@@ -95,7 +96,7 @@ class ToDo {
 		let nextList = listsArr.find((list) => list.id !== listId);
 
 		if (!nextList) {
-			RenderingModule.showStartPage(true);
+			StateRenderingModule.showStartPage(true);
 			DatabaseInfoModule.deleteInfo(database, "To-do information", {key: "currentList"});
 			DatabaseInfoModule.deleteInfo(database, "To-do information", {key: "currentListIndex"});
 			this.currentList = null;

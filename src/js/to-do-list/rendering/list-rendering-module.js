@@ -17,6 +17,13 @@ export function setNavbarListName(listId, newListName) {
   listInput.title = `Switch to '${newListName}'`;
 }
 
+export function setListAsActive(listId) {
+  let allLists = document.querySelectorAll("[data-list-id]");
+  Array.from(allLists).forEach((list) => list.classList.remove("is-list-selected"));
+  let listDiv = document.querySelector(`[data-list-id=${listId}]`);
+  listDiv.classList.add("is-list-selected");
+}
+
 /**
  * Renders the specified list into the navbar
  * @function renderListInNavbar
@@ -37,12 +44,15 @@ export function renderListInNavbar(listId, newListName) {
 
   let newList = document.createElement("div");
   newList.classList.add("each-list-div");
-  newList.title = `Switch to '${newListName}'`;
   newList.setAttribute("data-list-id", listId);
+
+  let newGrip = document.createElement("i");
+  newGrip.classList.add("fas", "fa-grip-lines", "grip-list")
 
   let newListInput = document.createElement("div");
   newListInput.classList.add("each-list-input");
   newListInput.innerHTML = newListName;
+  newListInput.title = `Switch to '${newListName}'`;
   newListInput.addEventListener("click", () => {
     InitializationModule.switchToList(listId);
   });
@@ -57,7 +67,7 @@ export function renderListInNavbar(listId, newListName) {
     InitializationModule.deleteList(listId, listName);
   });
 
-  newList.append(newListInput, listDelete);
+  newList.append(newGrip, newListInput, listDelete);
   listsContainer.append(newList);
 }
 

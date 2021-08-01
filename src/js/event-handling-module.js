@@ -1,3 +1,5 @@
+import * as StateRenderingModule from './to-do-list/rendering/state-rendering-module.js';
+
 /**
  * This is the DOM element handler module.<br>
  * It stores functions related to the handling of user events inside the DOM.
@@ -18,6 +20,13 @@ export function handleUserInput(inputElementSelector, onEnterFunction, otherPara
     let inputValue = getUserInput(inputElementSelector);
     switch (event.code) {
       case "Enter":
+        if (!validateInput(inputValue, "required")) {
+          StateRenderingModule.showShadowScreen(true);
+          inputElement.classList.add("is-element-highlighted");
+          return;
+        }
+        StateRenderingModule.showShadowScreen(false);
+        inputElement.classList.remove("is-element-highlighted");
         onEnterFunction(inputValue, otherParams);
         if (clearAfterEnter) {
           clearInput(inputElementSelector);
@@ -55,12 +64,17 @@ export function clearInput(inputElementSelector) {
   inputElement.value = "";
 }
 
-export function validateInput(value, {flag, validatorValue} = {flag}) {
+/**
+ * Checks whether the specified value passes the specified test or not
+ * @function validateInput
+ * @param {string} value Value inserted by the user
+ * @param {string} flag Flag specifying the check type
+ * @param {RegExp} [validatorValue] Regular expression to perform the validation
+ * @returns {boolean}
+ */
+export function validateInput(value, flag, validatorValue) {
   if (flag === "required") {
     return value.length > 0;
-  }
-  if (flag === "min-length") {
-    return value.length > validatorValue;
   }
   if (flag === "regex") {
     return validatorValue.test(value);

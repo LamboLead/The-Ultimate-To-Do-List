@@ -21,7 +21,7 @@
 -> Delete list (add confirmation window)
 - Done!
 
-- IMPORTANT MESSAGE: Start working on the shadow and confirmation box functionalities in the 'shadow' branch.
+- IMPORTANT MESSAGE: Fix the code organization regarding the showStartPage&Co. functions.
 
 -> Update list name
 -> Reorder lists
