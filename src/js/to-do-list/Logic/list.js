@@ -19,15 +19,13 @@ class List {
 	 * @param {string} id Id of the new list
 	 * @param {string} name Name of the new list
 	 * @param {Date} [createdAt] Date of creation of the new list
-	 * @param {number} [order] Position of the list in the DOM
 	 * @param {number} [currentTaskIndex] Index of the last-created task
 	 * @param {Array<Object>} [tasks] Tasks inside the list
 	 */
-	constructor(id, name, createdAt = new Date(), order = 1, currentTaskIndex = 1, tasks = []) {
+	constructor(id, name, createdAt = new Date(), currentTaskIndex = 1, tasks = []) {
 		this.id = id;
 		this.name = name;
 		this.createdAt = createdAt;
-		this.order = order;
 		this.currentTaskIndex = currentTaskIndex;
 		this.tasks = tasks;
 	}
@@ -104,7 +102,7 @@ class List {
 	}
 
 	/**
-	 * Rendes the list and its tasks in the main div
+	 * Renders the list and its tasks in the main div
 	 */
 	render() {
 		// Render list
@@ -116,17 +114,6 @@ class List {
 		let orderedList = sortItems(this.tasks, "order");
 		orderedList.forEach((task) => task.render());
 	}
-}
-
-/**
- * Searches inside an array of objects and finds the one that matches the provided property-value pair
- * @function findElementIndex
- * @param {Array<Object>} objectsArr Array of objects to perform the searching
- * @param {{prop: string, val:string|number}} parameters Parameters of the object to match
- * @returns {number} Index of the element in the array
- */
-function findElementIndex(objectsArr, {prop, val}) {
-	return objectsArr.findIndex((element) => element[prop] === val);
 }
 
 /**

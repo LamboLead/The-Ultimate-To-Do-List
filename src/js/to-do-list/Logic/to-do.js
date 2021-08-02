@@ -25,6 +25,7 @@ class ToDo {
 		if (!ToDo.instance) {
 			this.currentList = null;
 			this.currentListIndex = 1;
+			this.lists = [];
 			ToDo.instance = this;
 		}
 		return ToDo.instance;
@@ -36,24 +37,29 @@ class ToDo {
 	async initialize() {
 		console.log("Initializing application");
 
-		let currentListId, currentListIndex;
+		let currentListId, currentListIndex, lists;
 
-		[currentListId, currentListIndex] = await DatabaseInfoModule.retrieveInfo(database, "To-do information");
-		console.log(`Current list: ${currentListId}. Next list: ${currentListIndex}`);
+		[currentListId, currentListIndex, lists] = await DatabaseInfoModule.retrieveInfo(database, "To-do information");
+		console.log(`Current list: ${currentListId}. Next list: ${currentListIndex}. Lists: ${lists}`);
 
 		if (!currentListId) return;
 
-		[this.currentList, this.currentListIndex] = [currentListId, currentListIndex];
+		[this.currentList, this.currentListIndex, this.lists] = [currentListId, currentListIndex, lists];
 
 		// Render lists in navbar
 
-		let retrievedLists = sortItems(await DatabaseInfoModule.retrieveInfo(database, "Lists"), "order");
-		retrievedLists.forEach((list) => {
+		let retrievedLists = await DatabaseInfoModule.retrieveInfo(database, "Lists"); // Sort lists by order
+		let orderedLists = this.lists.map((listId) => {
+			let listIndex = findElementIndex(retrievedLists, {prop: "id", val: listId});
+			return retrievedLists[listIndex];
+		});
+
+		orderedLists.forEach((list) => {
 			let newList = normalizeList(list, false);
 			newList.renderInNavbar();
 		});
 
-		// Render list in list view
+		// Render current list in list view
 		this.switchToList(currentListId);
 
 		StateRenderingModule.showStartPage(false);
@@ -67,16 +73,21 @@ class ToDo {
 		DatabaseInfoModule.saveInfo(database, "Lists", {value: this.currentList});
 		DatabaseInfoModule.saveInfo(database, "To-do information", {key: "currentList", value: this.currentList.id});
 		DatabaseInfoModule.saveInfo(database, "To-do information", {key: "currentListIndex", value: this.currentListIndex});
+		DatabaseInfoModule.saveInfo(database, "To-do information", {key: "lists", value: this.lists});
 	}
 
 	/**
 	 * Creates a new list, saves it into the database and renders it.
 	 */
 	createList() {
+		let newListId = `list${this.currentListIndex}`;
 		this.currentList = new List(
-				`list${this.currentListIndex}`,
-				`My to-do list #${this.currentListIndex}`
+			newListId,
+			`My to-do list #${this.currentListIndex}`,
+			undefined,
+			this.currentListIndex
 		);
+		this.lists.push(newListId);
 		this.currentListIndex++;
 		
 		this.currentList.renderInNavbar();
@@ -90,24 +101,28 @@ class ToDo {
 	 * @param {string} listId The id of the deleted list
 	 */
 	async deleteList(listId) {
-		
-		// Find another list to render
-		let listsArr = await DatabaseInfoModule.retrieveInfo(database, "Lists");
-		let nextList = listsArr.find((list) => list.id !== listId);
 
-		if (!nextList) {
+		// Delete list from array
+		let listIndex = this.lists.findIndex((id) => id === listId);
+		this.lists.splice(listIndex, 1);
+		
+		// Find the next list to render
+		
+		let nextListId = this.lists[0];
+
+		if (!nextListId) {
 			StateRenderingModule.showStartPage(true);
 			DatabaseInfoModule.deleteInfo(database, "To-do information", {key: "currentList"});
 			DatabaseInfoModule.deleteInfo(database, "To-do information", {key: "currentListIndex"});
 			this.currentList = null;
 			this.currentListIndex = 1;
 		} else {
-			this.switchToList(nextList.id);
+			this.switchToList(nextListId);
 		}
 		// Remove list from navbar
 		RenderingModule.removeListFromNavbar(listId);
 
-		// Delete list from database
+		// Delete list from database and ToDo
 		DatabaseInfoModule.deleteInfo(database, "Lists", {key: listId});
 	}
 
@@ -130,6 +145,14 @@ class ToDo {
 		
 		this.currentList = normalizeList(retrievedList, true);
 		this.currentList.render();
+	}
+
+	/**
+	 * Rearranges lists according to the specified order
+	 * @param {Array<string>} listsOrderArr Array of organized lists
+	 */
+	rearrangeLists(listsOrderArr) {
+		this.lists = listsOrderArr
 	}
 }
 
@@ -155,7 +178,7 @@ function sortItems(itemsArr, orderBy) {
  * @returns {Object}
  */
 function normalizeList(previousList, fullNormalization) {
-	let newList = new List(previousList.id, previousList.name, previousList.createdAt, previousList.order, previousList.currentTaskIndex);
+	let newList = new List(previousList.id, previousList.name, previousList.createdAt, previousList.currentTaskIndex);
 	if (fullNormalization) {
 		previousList.tasks.forEach((task) => {
 			let newTask = new Task(task.id, task.caption, task.completed, task.order);
@@ -163,6 +186,17 @@ function normalizeList(previousList, fullNormalization) {
 		});
 	}
 	return newList;
+}
+
+/**
+ * Searches inside an array of objects and finds the one that matches the provided property-value pair
+ * @function findElementIndex
+ * @param {Array<Object>} objectsArr Array of objects to perform the searching
+ * @param {{prop: string, val:string|number}} parameters Parameters of the object to match
+ * @returns {number} Index of the element in the array
+ */
+function findElementIndex(objectsArr, {prop, val}) {
+	return objectsArr.findIndex((element) => element[prop] === val);
 }
 
 const toDo = new ToDo();

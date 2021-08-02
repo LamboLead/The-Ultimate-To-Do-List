@@ -45,6 +45,10 @@ export function renderListInNavbar(listId, newListName) {
   let newList = document.createElement("div");
   newList.classList.add("each-list-div");
   newList.setAttribute("data-list-id", listId);
+  newList.addEventListener("drop", () => {
+    InitializationModule.watchListOrder();
+    InitializationModule.saveDataHandler();
+  });
 
   let newGrip = document.createElement("i");
   newGrip.classList.add("fas", "fa-grip-lines", "grip-list")

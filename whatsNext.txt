@@ -24,7 +24,11 @@
 - IMPORTANT MESSAGE: Fix the code organization regarding the showStartPage&Co. functions.
 
 -> Update list name
+
+* In progress:
 -> Reorder lists
+* In progress
+
 
 -> Add error handling for input (Add a fadeout for the rest of the page but the input element, and clear it if the input is OK).
 

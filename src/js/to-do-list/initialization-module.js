@@ -20,7 +20,14 @@ ToDo.initialize();
 
 let onSave = false;
 const listContainer = document.getElementById("list_div");
-const saveObserver = new MutationObserver(() => {
+const saveObserver = new MutationObserver(saveDataHandler);
+saveObserver.observe(listContainer, {
+  attributes: true,
+  childList: true,
+  subtree: true
+});
+
+export function saveDataHandler() {
   if (!onSave) {
     onSave = true;
     setTimeout(() => {
@@ -28,12 +35,7 @@ const saveObserver = new MutationObserver(() => {
       ToDo.saveData();
     }, 1000);
   }
-});
-saveObserver.observe(listContainer, {
-  attributes: true,
-  childList: true,
-  subtree: true
-});
+}
 
 // Set handler for rearrange tasks
 
@@ -45,7 +47,7 @@ new Sortable.create(taskBox, {
   handle: ".grip-task"
 });
 
-// Set handler for rearrange lists
+// Set handler for rearrange list and save their order
 
 const listBox = document.getElementById("listing_div");
 new Sortable.create(listBox, {
@@ -56,7 +58,6 @@ new Sortable.create(listBox, {
 });
 
 // <- <- <- Handle user events -> -> ->
-
 
 EventHandlingModule.handleUserInput("#insert_task", createTask, undefined, true);
 EventHandlingModule.handleUserInput("#list_name", (newName) => {
@@ -127,12 +128,7 @@ export function checkTask(taskId) {
  * @function watchTaskOrder
  */
 export function watchTaskOrder() {
-  let tasks = document.querySelectorAll(".task-div");
-  let taskOrder = [];
-  tasks.forEach((task) => {
-    let taskId = task.getAttribute("data-task-id");
-    taskOrder.push(taskId);
-  });
+  let taskOrder = watchElementsOrder(".task-div", "data-task-id");
   ToDo.currentList.rearrangeTasks(taskOrder);
 }
 
@@ -165,8 +161,31 @@ export async function deleteList(listId, listName) {
   ToDo.deleteList(listId);
 }
 
+export function watchListOrder() {
+  let listOrder = watchElementsOrder(".each-list-div", "data-list-id");
+  ToDo.rearrangeLists(listOrder);
+}
+
+/**
+ * Scans the order of the elements with the specified selector in the DOM and returns it in an array
+ * @function watchOrder
+ * @param {string} elementsQuerySelector CSS selector of the elements you want to track their order
+ * @param {string} attributeName Name of the attribute that identifies each element
+ * @returns {Array<string>}
+ */
+function watchElementsOrder(elementsQuerySelector, attributeName) {
+  let elements = document.querySelectorAll(elementsQuerySelector);
+  let elementsOrder = [];
+  elements.forEach((elem) => {
+    let elementAttr = elem.getAttribute(attributeName);
+    elementsOrder.push(elementAttr);
+  });
+  return elementsOrder;
+}
+
 let arrow = document.getElementById("arrow_div");
 arrow.addEventListener("click", () => {
   console.log(ToDo.currentListIndex);
   console.log(ToDo.currentList);
+  console.log(ToDo.lists);
 });
