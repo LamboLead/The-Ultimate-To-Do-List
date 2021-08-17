@@ -1,10 +1,10 @@
-import * as StateRenderingModule from './to-do-list/rendering/state-rendering-module.js';
-
 /**
  * This is the DOM element handler module.<br>
  * It stores functions related to the handling of user events inside the DOM.
  *  @module EventHandling
  */
+
+import * as StateRenderingModule from './to-do-list/rendering/state-rendering-module.js';
 
 /**
  * Handles the user input from the specified input element. Supports 'Enter' and 'Escape' keys
@@ -79,4 +79,62 @@ export function validateInput(value, flag, validatorValue) {
   if (flag === "regex") {
     return validatorValue.test(value);
   }
+}
+
+
+// Switch handling
+
+/**
+ * Sets up the specified switch to do something when the user clicks it
+ * @function setUpSwitch
+ * @param {string} switchFrameId Id of the switch' frame
+ * @param {string} insideSwitchSelector Query selector of the inside of the switch
+ * @param {{leftValue: *, rightValue: *, callback: function}} options Parameters to fuck
+ */
+export function setUpSwitch(switchFrameId, insideSwitchSelector, {leftValue, rightValue, callback}) {
+  let switchFrame = document.getElementById(switchFrameId);
+  let insideSwitch = switchFrame.querySelector(insideSwitchSelector);
+
+  let correspondingValues = {left: ["-80%", leftValue], right: ["0%", rightValue]};
+  let pickedValue;
+
+  switchFrame.addEventListener("click", () => {
+    switchFrame.removeEventListener("transitionend", afterTransition);
+    let left = getComputedStyle(insideSwitch).left.match(/\d+/)[0];
+    if (left === "0") {
+      pickedValue = correspondingValues.left;
+    } else {
+      pickedValue = correspondingValues.right;
+    }
+    insideSwitch.style.setProperty("left", pickedValue[0]);
+
+    switchFrame.addEventListener("transitionend", afterTransition);
+  });
+  
+  function afterTransition(event) {
+    if (event.propertyName === 'left') {
+      callback(pickedValue[1]);
+    }
+  }
+}
+
+/**
+ * Renders the state of the switch depending on the specified value
+ * @param {string} switchFrameId Id of the switch' frame
+ * @param {string} insideSwitchSelector Query selector of the inside of the switch
+ * @param {{leftValue: *, rightValue: *}} options Parameters to work with
+ * @param {*} selectedValue Value in which depends the position of the switch
+ */
+export function renderSwitch(switchFrameId, insideSwitchSelector, {leftValue, rightValue},  selectedValue) {
+  let switchFrame = document.getElementById(switchFrameId);
+  let insideSwitch = switchFrame.querySelector(insideSwitchSelector);
+  let correspondingValues = {left: "-80%", right: "0%"};
+  let pickedValue;
+
+  if (selectedValue === leftValue) {
+    pickedValue = correspondingValues.left
+  } else if (selectedValue === rightValue) {
+    pickedValue = correspondingValues.right;
+  }
+  insideSwitch.style.setProperty("left", pickedValue);
 }

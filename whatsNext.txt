@@ -20,24 +20,34 @@
 - Done!
 -> Delete list (add confirmation window)
 - Done!
-
-- IMPORTANT MESSAGE: Fix the code organization regarding the showStartPage&Co. functions.
-
 -> Update list name
-
-* In progress:
+- Done!
 -> Reorder lists
-* In progress
-
+- Done!
 
 -> Add error handling for input (Add a fadeout for the rest of the page but the input element, and clear it if the input is OK).
+- Done!
 
 * Customization
 
--> Toggle animations properly
-
 -> Set user images as background
--> Set API images as background
--> Save images in database & retrieve them from database
-
+- Done!
+-> Toggle animations properly
+- Done!
 -> Toggle theme
+- Done!
+
+-> Set up slider functionality, including moving the images inside of it, setting the user info, and going back to the galleries div
+- In progress. [[[DO THIS FIRST]]]
+
+-> Set API images as background.
+- In progress
+
+-> Save images in database & retrieve them from database
+- In progress
+
+-> 
+
+* Issues
+
+-> To-do > On delete list: The list is not being deleted inside "Lists" array on IndexedDB, causing problems.

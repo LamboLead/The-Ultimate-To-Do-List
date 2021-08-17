@@ -1,7 +1,12 @@
+/**
+ * This is the initialization module.<br>
+ * It stores code related to the initialization of the application.
+ * @module Initialization
+ */
+
 import * as EventHandlingModule from '../event-handling-module.js';
-import toDo from './logic/to-do.js';
-import ToDo from './logic/to-do.js';
 import * as StateRenderingModule from '../to-do-list/rendering/state-rendering-module.js';
+import ToDo from './logic/to-do.js';
 
 // Remove page loader
 
@@ -11,10 +16,6 @@ window.onload = () => {
         pageLoader.style.setProperty("top", "-100vh");
     }, 3500);
 }
-
-// Initialize application
-
-ToDo.initialize();
 
 // Set handler for saving information
 

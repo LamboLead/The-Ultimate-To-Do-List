@@ -1,7 +1,7 @@
-import customManager from "./custom manager.js";
-import processUserImages from './background-images/image-processing-module/user-images.js';
-import previewFetchedImages from './background-images/image-processing-module/unsplash-api-images.js';
-import * as RenderSliderModule from './background-images/rendering-module/render slider.js';
+import customManager from "./background-images/custom manager.js";
+import processUserImages from './background-images/image-processing/user-images.js';
+import previewFetchedImages from './background-images/image-processing/unsplash-api-images.js.js';
+import * as RenderSliderModule from './background-images/rendering-module/slider-rendering-module.js';
 
 // Set everything up
 customManager.initialize();
@@ -42,18 +42,4 @@ previousImageButton.addEventListener("click", () => {
 });
 sliderImagesContainer.addEventListener("click", () => {
 
-});
-
-// Toggle animations
-
-const animationSwitch = document.getElementById("switch_animation_div");
-animationSwitch.addEventListener("click", () => {
-  customManager.toggleAnimations();
-});
-
-// Toggle theme
-
-const themeDiv = document.getElementById("change_theme");
-themeDiv.addEventListener("click", () => {
-    customManager.setTheme();
 });

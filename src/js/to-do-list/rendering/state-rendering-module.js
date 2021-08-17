@@ -3,7 +3,7 @@
  * @function showStartPage
  * @param {boolean} indicator Indicator for the start page to be rendered
  */
- export function showStartPage(indicator) {
+export function showStartPage(indicator) {
   let mainContent = document.getElementById("main_content_div");
   let listsTab = document.getElementById("my_tasks_div");
   if (indicator) {
@@ -78,4 +78,24 @@ export async function showConfirmationDialog(title, info, buttonHandlers) {
     }, 10000)
   });
   return promise.then();
+}
+
+/**
+ * Displays the pop-up alert with the specified message
+ * @function popAppear
+ * @param {string} message Message to show inside the pop-up alert
+ */
+function popAppear(message) {
+	let alertPop = document.getElementById("pop_up_div");
+	alertPop.innerText = `✅ ${message}`;
+	setTimeout(() => {
+		alertPop.classList.add("is-appearing");
+	}, 100);
+	setTimeout(() => {
+		alertPop.classList.remove("is-appearing");
+		alertPop.classList.add("is-dissapearing");
+	}, 3000);
+	alertPop.addEventListener("transitionend", function() {
+		alertPop.classList.remove("is-dissapearing");
+	});
 }

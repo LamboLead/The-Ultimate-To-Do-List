@@ -28,6 +28,7 @@ class ToDo {
 			this.lists = [];
 			ToDo.instance = this;
 		}
+		this.initialize();
 		return ToDo.instance;
 	}
 
