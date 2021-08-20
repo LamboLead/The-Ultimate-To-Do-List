@@ -46,3 +46,19 @@ groupOfGalleries.forEach((gallery) => {
   });
 });
 
+// Set up slider
+
+import {nextSliderImage, previousSliderImage, setFetchedImagesAsBackground, hideSlider} from './rendering-module/slider-rendering-module.js';
+
+const previousImageButton = document.getElementById("previous_image_button");
+previousImageButton.addEventListener("click", previousSliderImage);
+
+const nextImageButton = document.getElementById("next_image_button");
+nextImageButton.addEventListener("click", nextSliderImage);
+
+const hideSliderButton = document.getElementById("back_to_galleries_button");
+hideSliderButton.addEventListener("click", hideSlider);
+
+const selectGalleryButton = document.getElementById("select_gallery_button");
+selectGalleryButton.addEventListener("click", setFetchedImagesAsBackground);
+

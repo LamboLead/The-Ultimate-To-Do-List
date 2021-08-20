@@ -38,7 +38,7 @@ body {
   background-repeat: no-repeat;
   overflow: hidden;
   animation-name: large-horizontal;
-  animation-duration: 20s;
+  animation-duration: 30s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
   animation-timing-function: ease-in-out;
@@ -99,18 +99,18 @@ body {
   }
   @keyframes large-horizontal {
     0% {
-      background-position: left;
+      background-position: top;
     }
     100% {
-      background-position: right;
+      background-position: bottom;
     }
   }
   @keyframes general-horizontal {
     0% {
-      background-position-x: left;
+      background-position-x: top;
     }
     100% {
-      background-position-x: right;
+      background-position-x: bottom;
     }
   }
   @keyframes square {
@@ -131,10 +131,10 @@ body {
   }
   @keyframes large-vertical {
     0% {
-      background-position: left;
+      background-position: top;
     }
     100% {
-      background-position: right;
+      background-position: bottom;
     }
   }
 }
@@ -791,6 +791,7 @@ a:hover {
   border-right: 2px solid var(--secondBorderColor);
   border-bottom: 2px solid var(--secondBorderColor);
   border-radius: 5px;
+  overflow: hidden;
 }
 
 #images_container_div {
@@ -823,7 +824,6 @@ a:hover {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  background-color: yellow;
 }
 
 #previous_image_button {

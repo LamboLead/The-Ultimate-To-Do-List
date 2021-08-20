@@ -115,6 +115,7 @@ class ToDo {
 			StateRenderingModule.showStartPage(true);
 			DatabaseInfoModule.deleteInfo(database, "To-do information", {key: "currentList"});
 			DatabaseInfoModule.deleteInfo(database, "To-do information", {key: "currentListIndex"});
+			DatabaseInfoModule.deleteInfo(database, "To-do information", {key: "lists"});
 			this.currentList = null;
 			this.currentListIndex = 1;
 		} else {

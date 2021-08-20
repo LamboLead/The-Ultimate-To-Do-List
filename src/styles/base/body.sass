@@ -1,98 +1,98 @@
 $background: linear-gradient(145deg,rgb(0, 0, 50),rgb(0, 0, 50),rgb(22, 7, 107),rgb(121, 1, 219),rgb(235, 8, 243),rgb(235, 8, 243))
     
 body
-    margin: 0
+	margin: 0
 
-    width: 100vw
-    height: 100vh
+	width: 100vw
+	height: 100vh
 
-    background-image: $background
-    background-repeat: no-repeat
-    overflow: hidden
+	background-image: $background
+	background-repeat: no-repeat
+	overflow: hidden
 
-    animation-name: large-horizontal
-    animation-duration: 20s
-    animation-iteration-count: infinite
-    animation-direction: alternate
-    animation-timing-function: ease-in-out
+	animation-name: large-horizontal
+	animation-duration: 30s
+	animation-iteration-count: infinite
+	animation-direction: alternate
+	animation-timing-function: ease-in-out
 
-    transition: background-image 4000ms ease
+	transition: background-image 4000ms ease
 
-    display: flex
+	display: flex
 
-    @include screen-width-between($phone...)
-        background-size: cover
-        flex-direction: column
-        overflow: hidden
+	@include screen-width-between($phone...)
+		background-size: cover
+		flex-direction: column
+		overflow: hidden
 
-        @keyframes large-horizontal
-            0%
-                background-position: left
-            100%
-                background-position: right
+		@keyframes large-horizontal
+			0%
+				background-position: left
+			100%
+				background-position: right
 
-        @keyframes general-horizontal
-            0%
-                background-position-x: left
-            100%
-                background-position-x: right
-        
-        @keyframes square
-            0%
-                background-position: left
-            100%
-                background-position: right
+		@keyframes general-horizontal
+			0%
+				background-position-x: left
+			100%
+				background-position-x: right
+		
+		@keyframes square
+			0%
+				background-position: left
+			100%
+				background-position: right
 
-        @keyframes general-vertical
-            0%
-                background-position: left
-            100%
-                background-position: right
+		@keyframes general-vertical
+			0%
+				background-position: left
+			100%
+				background-position: right
 
-        @keyframes large-vertical
-            0%
-                background-position: left
-            100%
-                background-position: right
+		@keyframes large-vertical
+			0%
+				background-position: left
+			100%
+				background-position: right
 
-    @include screen-width-between($desktop...)
-        background-size: 100%
-        flex-direction: row
+	@include screen-width-between($desktop...)
+		background-size: 100%
+		flex-direction: row
 
-        @keyframes large-horizontal
-            0%
-                background-position: left
-            100%
-                background-position: right
+		@keyframes large-horizontal
+			0%
+				background-position: top
+			100%
+				background-position: bottom
 
-        @keyframes general-horizontal
-            0%
-                background-position-x: left
-            100%
-                background-position-x: right
-        
-        @keyframes square
-            0%
-                background-position: bottom
-            100%
-                background-position: top
+		@keyframes general-horizontal
+			0%
+				background-position-x: top
+			100%
+				background-position-x: bottom
+		
+		@keyframes square
+			0%
+				background-position: bottom
+			100%
+				background-position: top
 
-        @keyframes general-vertical
-            0%
-                background-position: left
-            100%
-                background-position: right
+		@keyframes general-vertical
+			0%
+				background-position: left
+			100%
+				background-position: right
 
-        @keyframes large-vertical
-            0%
-                background-position: left
-            100%
-                background-position: right
+		@keyframes large-vertical
+			0%
+				background-position: top
+			100%
+				background-position: bottom
 
 @keyframes animations-disabled
-    0%
-        background-position: center
-        background-size: cover
-    100%
-        background-position: center
-        background-size: cover
+	0%
+		background-position: center
+		background-size: cover
+	100%
+		background-position: center
+		background-size: cover

@@ -36,18 +36,29 @@
 - Done!
 -> Toggle theme
 - Done!
-
--> Set up slider functionality, including moving the images inside of it, setting the user info, and going back to the galleries div
-- In progress. [[[DO THIS FIRST]]]
-
--> Set API images as background.
-- In progress
-
 -> Save images in database & retrieve them from database
-- In progress
+- Done!
+-> Set up slider functionality
+- Done!
 
--> 
+-> Eliminate the 'go back button'. Do that functionality with the 'select images' button
+- In progress
 
 * Issues
 
 -> To-do > On delete list: The list is not being deleted inside "Lists" array on IndexedDB, causing problems.
+- Testing...
+
+-> To-do > On retrieving Api-images: When rendering slider, data in the store "Lists" is being saved without intention.
+Possible causes: Mutation observer
+
+-> Background manager > Setting up animations for the first time: Database value for 'animations' does not match with what appears on screen.
+Possible causes: The program doesn't set a default value for animations in the database.
+
+-> To-do > On checking and deleting tasks: The function 'findElementIndex' is not defined.
+
+-> Slider > On showing slider when it is not shown: The fetched images do not accomodate to the slider's width.
+Possible causes: The frameWidth for the slider has the wrong value
+
+-> Performance: The program is too slow!
+Possible causes: Hardware limitations (processor, CPU, hard drive), too much animations, memory leak, unintended calling of functions, bad coding practices...
