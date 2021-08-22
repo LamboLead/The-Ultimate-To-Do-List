@@ -3,7 +3,7 @@
     z-index: 10
 
     width: 19rem
-    height: 29rem
+    height: 27rem
     padding: 0.3rem
 
     border: 1px solid var(--secondBorderColor)
@@ -20,15 +20,24 @@
     cursor: default
 
     @include screen-width-between($phone...)
-        top: -29.85rem
+        top: -27.85rem
         left: -5rem
         
     @include screen-width-between($desktop...)
         top: -11rem
         left: -19.5rem
+
+    .settings-title-span
+        display: block
+        width: 100%
+        height: 5%
+        margin-bottom: 1rem
+        text-align: center
     
 #background_div:hover + #background_settings_div
     display: flex
+    opacity: 1 !important
+    pointer-events: all !important
 
 #background_settings_div:hover
     display: flex

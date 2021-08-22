@@ -96,9 +96,7 @@
 						</div>
 
 						<div id="lists_settings_div">
-							<span class="settings-title-span">
-								My lists
-							</span>
+							<span class="settings-title-span">My lists</span>
 							<div id="listing_div">
 								<!-- <div class="each-list-div" id="list1">
 									<div class="each-list-input">Fake list</div>
@@ -118,11 +116,14 @@
 						<div id="background_settings_div">
 								<span class="settings-title-span">Change background</span>
 								
-								<button type="submit" id="select_files_fake">Pick one or more images</button>
-								<input type="file" id="select_files" multiple="multiple" hidden>
+								<div id="user_images_div">
+									<button type="submit" id="select_files_fake">Pick one or more images</button>
+									<input type="file" id="select_files" multiple="multiple" hidden>
+								</div>
 
-								<!-- Galleries -->
-								<div id="background_galleries_div">
+								<div id="galleries_loader_slider_div">
+									<!-- Galleries -->
+									<div id="background_galleries_div">
 										<span class="background-label-span">Or choose between curated galleries:</span>
 										<div class="selected-backgrounds-div">
 											<div class="sample-image-div" value="landscapes">
@@ -150,49 +151,50 @@
 														<!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Unsplash_wordmark_logo.svg/1024px-Unsplash_wordmark_logo.svg.png" alt="Unsplash logo" class="unsplash-logo-img"> -->
 												</span>
 										</a>
-								</div>
+									</div>
 
-								<!-- Loader -->
-								<div id="slider_loader_div" class="background-option-div is-div-hidden">
-										<span>Loading...</span>
-								</div>
+									<!-- Loader -->
+									<div id="slider_loader_div" class="is-div-hidden">
+											<span>Loading...</span>
+									</div>
 
-								<!-- Slider -->
-								<div id="slider_div" class="background-option-div is-div-hidden">
-										<span>Gallery name</span>
-										<div id="slider_container_div">
-											<div id="images_container_div">
-												<!-- <img src="https://th.bing.com/th/id/OIP.ZzjDEJigfXHJjR-b14FK-QHaKH?pid=ImgDet&rs=1" alt="" id="last_image">
-												<img src="https://coloringpage.eu/wp-content/uploads/2018/07/number-one.jpg" alt="">
-												<img src="https://th.bing.com/th/id/OIP.ZzjDEJigfXHJjR-b14FK-QHaKH?pid=ImgDet&rs=1" alt=""> -->
-												<!-- <img src="" alt="">
-												<img src="" alt="">
-												<img src="" alt="">
-												<img src="" alt="">
-												<img src="" alt="">
-												<img src="" alt="">
-												<img src="" alt="">
-												<img src="" alt=""> -->
-												<!-- <img src="https://coloringpage.eu/wp-content/uploads/2018/07/number-one.jpg" alt="" id="first_image"> -->
-											</div>
+									<!-- Slider -->
+									<div id="slider_div" class="is-div-hidden">
+											<span>Gallery name</span>
+											<div id="slider_container_div">
+												<div id="images_container_div">
+													<!-- <img src="https://th.bing.com/th/id/OIP.ZzjDEJigfXHJjR-b14FK-QHaKH?pid=ImgDet&rs=1" alt="" id="last_image">
+													<img src="https://coloringpage.eu/wp-content/uploads/2018/07/number-one.jpg" alt="">
+													<img src="https://th.bing.com/th/id/OIP.ZzjDEJigfXHJjR-b14FK-QHaKH?pid=ImgDet&rs=1" alt=""> -->
+													<!-- <img src="" alt="">
+													<img src="" alt="">
+													<img src="" alt="">
+													<img src="" alt="">
+													<img src="" alt="">
+													<img src="" alt="">
+													<img src="" alt="">
+													<img src="" alt=""> -->
+													<!-- <img src="https://coloringpage.eu/wp-content/uploads/2018/07/number-one.jpg" alt="" id="first_image"> -->
+												</div>
 
-											<div id="previous_image_button" class="slider-button">
-												<i class="fas fa-chevron-circle-left"></i>
+												<div id="previous_image_button" class="slider-button">
+													<i class="fas fa-chevron-circle-left"></i>
+												</div>
+												<div id="next_image_button" class="slider-button">
+													<i class="fas fa-chevron-circle-right"></i>
+												</div>
 											</div>
-											<div id="next_image_button" class="slider-button">
-												<i class="fas fa-chevron-circle-right"></i>
+											<div id="gallery_info_div">
+													<span> Photo by: </span>
+													<a target="_blank">
+															Some info
+													</a>
 											</div>
-										</div>
-										<div id="gallery_info_div">
-												<span> Photo by: </span>
-												<a target="_blank">
-														Some info
-												</a>
-										</div>
-										<div id="slider_buttons_div">
-												<button type="button" id="back_to_galleries_button">Go back</button>
-												<button type="button" id="select_gallery_button">Select gallery</button>
-										</div>
+											<div id="slider_buttons_div">
+													<button type="button" id="back_to_galleries_button">Go back</button>
+													<button type="button" id="select_gallery_button">Select gallery</button>
+											</div>
+									</div>
 								</div>
 
 								<div id="enable_animations_div">

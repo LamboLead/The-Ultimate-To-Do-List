@@ -1,12 +1,23 @@
 .is-div-hidden
-    margin: 0 !important
-    height: 0 !important
-    padding: 0 !important
-    opacity: 0 !important
-    border: none !important
-    pointer-events: none !important
+	margin: 0 !important
+	padding: 0 !important
+	opacity: 0 !important
+	z-index: 1 !important
+	pointer-events: none !important
+
+.is-div-partially-hidden
+	opacity: 0.5 !important
+	pointer-events: none !important
 
 .is-button-disabled
-    opacity: 0.6 !important
-    cursor: default !important
-    pointer-events: none !important
+	opacity: 0.6 !important
+	cursor: default !important
+	pointer-events: none !important
+
+.is-div-temporally-shown
+	display: flex !important
+	pointer-events: none
+	opacity: 0
+	&:hover
+		opacity: 1
+		pointer-events: all

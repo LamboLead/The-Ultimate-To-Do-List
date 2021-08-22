@@ -62,14 +62,18 @@ body
 		@keyframes large-horizontal
 			0%
 				background-position: top
+				background-size: 115%
 			100%
 				background-position: bottom
+				backgroud-size: 100%
 
 		@keyframes general-horizontal
 			0%
-				background-position-x: top
+				background-position: top left
+				background-size: 110%
 			100%
-				background-position-x: bottom
+				background-position: bottom right
+				background-size: 100%
 		
 		@keyframes square
 			0%
@@ -79,15 +83,20 @@ body
 
 		@keyframes general-vertical
 			0%
-				background-position: left
+				background-position: center left
+				background-size: 110%
+			50%
+				background-position: bottom center
 			100%
-				background-position: right
+				background-position: center right
+				background-size: 100%
 
 		@keyframes large-vertical
 			0%
-				background-position: top
+				background-position: center left
+				background-size: 110%
 			100%
-				background-position: bottom
+				background-position: bottom right
 
 @keyframes animations-disabled
 	0%

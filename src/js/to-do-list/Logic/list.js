@@ -130,4 +130,8 @@ function sortItems(itemsArr, orderBy) {
 	})
 }
 
+function findElementIndex(objectsArr, {prop, val}) {
+	return objectsArr.findIndex((element) => element[prop] === val);
+}
+
 export default List;

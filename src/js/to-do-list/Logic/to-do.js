@@ -86,7 +86,7 @@ class ToDo {
 			newListId,
 			`My to-do list #${this.currentListIndex}`,
 			undefined,
-			this.currentListIndex
+			1
 		);
 		this.lists.push(newListId);
 		this.currentListIndex++;
@@ -95,6 +95,7 @@ class ToDo {
 		this.currentList.render();
 
 		StateRenderingModule.showStartPage(false);
+		this.saveData();
 	}
 
 	/**
@@ -120,6 +121,7 @@ class ToDo {
 			this.currentListIndex = 1;
 		} else {
 			this.switchToList(nextListId);
+			DatabaseInfoModule.saveInfo(database, "To-do information", {key: "lists", value: this.lists});
 		}
 		// Remove list from navbar
 		RenderingModule.removeListFromNavbar(listId);
@@ -155,6 +157,7 @@ class ToDo {
 	 */
 	rearrangeLists(listsOrderArr) {
 		this.lists = listsOrderArr
+		DatabaseInfoModule.saveInfo(database, "To-do information", {key: "lists", value: this.lists});
 	}
 }
 

@@ -1,210 +1,220 @@
+#galleries_loader_slider_div
+	position: relative
+	width: 100%
+	height: 70%
+	border-top: 1px solid var(--secondBorderColor)
+
 #background_galleries_div
-    width: 100%
-    height: 70%
+	position: absolute
+	width: 100%
+	height: 100%
 
-    border-top: 1px solid var(--secondBorderColor)
+	display: flex
+	flex-direction: column
+	justify-content: space-evenly
 
-    transition: opacity 500ms ease, height 500ms ease
+	transition: opacity 500ms ease, height 500ms ease
 
-    .background-label-span
-        display: block
-        margin: 0rem
-        width: 100%
-        height: 1rem
-        font-size: 1rem
+	.background-label-span
+		display: block
+		margin-left: 0.5rem
+		margin-bottom: 0.5rem
+		width: 100%
+		height: 1rem
+		font-size: 1rem
 
-        svg
-            position: relative
-            top: 0.2rem
-            margin-inline: 0.7ch
+		svg
+			position: relative
+			top: 0.2rem
+			margin-inline: 0.7ch
+			margin-inline-end: 2ch
 
-            width: auto
-            height: 100%
-            fill: var(--fontColor)
+			width: auto
+			height: 100%
+			fill: var(--fontColor)
 
-    .selected-backgrounds-div
-        display: none
-        position: relative
-        top: 0.5rem
-        margin-inline: auto
+	.selected-backgrounds-div
+		// position: relative
+		// top: 0.5rem
+		margin-inline: auto
 
-        width: 100%
-        height: 88%
+		width: 100%
+		height: 75%
 
-        display: flex
-        flex-direction: row
-        flex-wrap: wrap
+		display: flex
+		flex-direction: row
+		flex-wrap: wrap
 
-        .sample-image-div
-            margin: 0.2rem
-            width: 46%
-            height: 43%
+		.sample-image-div
+			width: 46%
+			height: 45%
+			margin-inline: 0.2rem
 
-            border: 1px solid var(--secondBorderColor)
-            border-right: 1px solid var(--mainBorderColor)
-            border-bottom: 1px solid var(--mainBorderColor)
-            border-radius: 3px
-            background-color: var(--popUpColor)
+			border: 1px solid var(--secondBorderColor)
+			border-right: 1px solid var(--mainBorderColor)
+			border-bottom: 1px solid var(--mainBorderColor)
+			border-radius: 3px
+			background-color: var(--popUpColor)
 
-            overflow: hidden
+			overflow: hidden
 
-            display: flex
-            flex-direction: column
+			display: flex
+			flex-direction: column
 
-            cursor: pointer
-            transition: transform 200ms ease, border-right 200ms ease, border-bottom 200ms ease
+			cursor: pointer
+			transition: transform 200ms ease
 
-            &:hover
-                transform: scale(1.05)
-                border-right: 2px solid var(--mainBorderColor)
-                border-bottom: 2px solid var(--mainBorderColor)
+			&:hover
+				transform: scale(1.02)
+				border-right: 2px solid var(--mainBorderColor)
+				border-bottom: 2px solid var(--mainBorderColor)
 
-            img
-                width: 100%
-                height: 75%
-                object-fit: cover
-                pointer-events: none
+			img
+				width: 100%
+				height: 75%
+				object-fit: cover
+				pointer-events: none
 
-            .sample-image-span
-                display: block
-                margin-top: 0.2rem
-                text-align: center
-                font-size: 0.9rem
+			.sample-image-span
+				display: block
+				margin-top: 0.2rem
+				text-align: center
+				font-size: 0.9rem
 
 #slider_loader_div
-    position: relative
-    width: 100%
-    height: 70%
+	position: absolute
+	width: 100%
+	height: 100%
 
-    border-top: 1px solid var(--secondBorderColor)
+	display: flex
+	flex-direction: column
+	justify-content: center
+	align-items: center
 
-    display: flex
-    flex-direction: column
-    justify-content: center
-    align-items: center
-
-    overflow: hidden
-    transition: opacity 500ms ease, height 500ms ease
+	overflow: hidden
+	transition: opacity 500ms ease-in
 
 #slider_div
-    position: relative
-    z-index: 10
-    width: 100%
-    height: 70%
+	position: absolute
+	z-index: 10
+	width: 100%
+	height: 100%
 
-    border-top: 1px solid var(--secondBorderColor)
+	border-top: 1px solid var(--secondBorderColor)
 
-    padding-top: 0.2rem
+	padding-top: 0.2rem
 
-    display: flex
-    flex-direction: column
-    justify-content: space-evenly
-    align-items: center
+	display: flex
+	flex-direction: column
+	justify-content: space-evenly
+	align-items: center
 
-    cursor: default
-    transition: opacity 500ms ease, height 500ms ease
+	cursor: default
+	transition: opacity 500ms ease
+
+// Relative to the slider...
 
 #slider_container_div
-    display: block
-    position: relative
-    margin: 0.5rem
+	display: block
+	position: relative
+	margin: 0.5rem
 
-    width: 90%
-    height: 60%
+	width: 90%
+	height: 60%
 
-    border: 1px solid var(--secondBorderColor)
-    border-right: 2px solid var(--secondBorderColor)
-    border-bottom: 2px solid var(--secondBorderColor)
-    border-radius: 5px
+	border: 1px solid var(--secondBorderColor)
+	border-right: 2px solid var(--secondBorderColor)
+	border-bottom: 2px solid var(--secondBorderColor)
+	border-radius: 5px
 
-    overflow: hidden
-    
+	overflow: hidden
+	
 
 #images_container_div
-    position: relative
+	position: relative
 
-    width: 100%
-    height: 100%
-    display: flex
-    flex-direction: row
-    justify-content: start
+	width: 100%
+	height: 100%
+	display: flex
+	flex-direction: row
+	justify-content: start
 
-    background-color: red
-    transition: transform 300ms ease
+	background-color: red
+	transition: transform 300ms ease
 
-    img
-        z-index: 11
-        width: 100%
-        height: auto
-        object-fit: cover
+	img
+		z-index: 11
+		width: 100%
+		height: auto
+		object-fit: cover
 
 .slider-button
-    position: absolute
-    top: 0px
-    z-index: 12
+	position: absolute
+	top: 0px
+	z-index: 12
 
-    width: 3rem
-    height: 100%
+	width: 3rem
+	height: 100%
 
-    color: var(--innerTaskColor)
-    text-shadow: 1px 1px 0 var(--fontColor), -1px -1px 0 var(--fontColor), 1px -1px 0 var(--fontColor), -1px 1px 0 var(--fontColor)
+	color: var(--innerTaskColor)
+	text-shadow: 1px 1px 0 var(--fontColor), -1px -1px 0 var(--fontColor), 1px -1px 0 var(--fontColor), -1px 1px 0 var(--fontColor)
 
-    display: flex
-    flex-direction: row
-    justify-content: center
-    align-items: center
+	display: flex
+	flex-direction: row
+	justify-content: center
+	align-items: center
 
-    cursor: pointer
+	cursor: pointer
 
 #previous_image_button
-    left: 0px
+	left: 0px
 
-    &:hover
-        .fa-chevron-circle-left
-            transform: translateX(-10px)
+	&:hover
+		.fa-chevron-circle-left
+			transform: translateX(-10px)
 
 .fa-chevron-circle-left, .fa-chevron-circle-right
-    transition: transform 200ms ease
-    pointer-events: none
+	transition: transform 200ms ease
+	pointer-events: none
 
 #next_image_button
-    right: 0px
+	right: 0px
 
-    &:hover
-        .fa-chevron-circle-right
-            transform: translateX(10px)
+	&:hover
+		.fa-chevron-circle-right
+			transform: translateX(10px)
 
 #gallery_info_div
-    margin: 0.1rem auto
-    width: 85%
-    height: 10%
-    color: var(--fontColor)
-    font-size: 1rem
-    cursor: pointer
+	margin: 0.1rem auto
+	width: 85%
+	height: 10%
+	color: var(--fontColor)
+	font-size: 1rem
+	cursor: pointer
 
-    &:hover
-        a
-            text-decoration: underline
+	&:hover
+		a
+			text-decoration: underline
 
 #slider_buttons_div
-    margin: 0.5rem
-    width: 100%
-    height: 3rem
-    display: flex
-    flex-direction: row
-    justify-content: space-evenly
-    align-items: center
+	margin: 0.5rem
+	width: 100%
+	height: 3rem
+	display: flex
+	flex-direction: row
+	justify-content: space-evenly
+	align-items: center
 
-    button
-        width: 45%
-        height: 2rem
+	button
+		width: 45%
+		height: 2rem
 
-        border: 1px solid var(--secondBorderColor)
-        background-color: var(--popUpColor)
-        color: var(--fontColor)
-        cursor: pointer
+		border: 1px solid var(--secondBorderColor)
+		background-color: var(--popUpColor)
+		color: var(--fontColor)
+		cursor: pointer
 
-    button:hover
-        border-color: var(--mainBorderColor)
-        border-right-width: 2px
-        border-bottom-width: 2px
+	button:hover
+		border-color: var(--mainBorderColor)
+		border-right-width: 2px
+		border-bottom-width: 2px

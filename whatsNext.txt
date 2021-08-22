@@ -3,62 +3,92 @@
 -> Investigate about functional programming examples to handle user input and select HTML elements.
 - Result: For now, use the procedural/functional way of doing things: Define html elements and add event listeners to them.
 
+- Done!
 -> Handle user input properly (task insert, update list name & update task caption)
-
 -> Clear input element with button
 -> Enter task with button
-
 -> Delete tasks
 -> Edit tasks
 -> Check tasks
 -> Reorder tasks
-- Result: All right!
-
 -> Create new list
-- Done!
 -> Switch to certain list
-- Done!
 -> Delete list (add confirmation window)
-- Done!
 -> Update list name
-- Done!
 -> Reorder lists
-- Done!
 
+- In progress
 -> Add error handling for input (Add a fadeout for the rest of the page but the input element, and clear it if the input is OK).
-- Done!
+  - Testing...
 
 * Customization
 
+- Done!
 -> Set user images as background
-- Done!
 -> Toggle animations properly
-- Done!
 -> Toggle theme
-- Done!
--> Save images in database & retrieve them from database
-- Done!
+-> Save images & retrieve them from database
 -> Set up slider functionality
-- Done!
 
--> Eliminate the 'go back button'. Do that functionality with the 'select images' button
 - In progress
+-> Set user metadata everytime the background image changes
+
+* Styling
+
+- In progress
+-> Fix responsiveness
+-> Fix vertical animations
+-> Fix colors for confirmation box
+-> Fix organizing background settings
 
 * Issues
 
 -> To-do > On delete list: The list is not being deleted inside "Lists" array on IndexedDB, causing problems.
-- Testing...
+  <Status: Testing>
+
+-> To-do > On creating new lists: The list is not being saved inside "Lists" array on IndexedDB.
+  <Status: Testing>
+  - Possible causes:
+    > MutationObserver is not being triggered when the user creates new lists due to the timeout that triggers the storing of information.
+  - Solution:
+    > Right after the 'Create new list' button is clicked, disable it until the database has saved changes (or after a timeout has finished).
 
 -> To-do > On retrieving Api-images: When rendering slider, data in the store "Lists" is being saved without intention.
-Possible causes: Mutation observer
+  <Status: Fixed!>
+  - Possible causes:
+    > MutationObserver malfunction
+  - Solution:
+    > Filter out the attributes that the observer is looking at.
 
 -> Background manager > Setting up animations for the first time: Database value for 'animations' does not match with what appears on screen.
-Possible causes: The program doesn't set a default value for animations in the database.
+  <Status: Testing>
+  - Possible causes:
+    > The program doesn't set a default value for animations in the database.
 
--> To-do > On checking and deleting tasks: The function 'findElementIndex' is not defined.
+-> To-do > On checking tasks: Information saving is not triggered.
+  <Status: Testing>
+  - Possible causes:
+    > MutationObserver isn't picking changes from the DOM.
+  - Solution:
+    > Change the 'checked' attribute of the checkbox element instead of the 'checked' property.
 
--> Slider > On showing slider when it is not shown: The fetched images do not accomodate to the slider's width.
-Possible causes: The frameWidth for the slider has the wrong value
+-> Slider > On showing slider div when the background div is not shown: The fetched images do not accomodate to the slider's width.
+  <Status: Testing>
+  - Possible causes:
+    > The frameWidth for the slider has the wrong value because the slider div is hidden.
+  - Solution:
+    > Keep the slider div opened (but hidden) until the slider has loaded.
 
 -> Performance: The program is too slow!
-Possible causes: Hardware limitations (processor, CPU, hard drive), too much animations, memory leak, unintended calling of functions, bad coding practices...
+  - Possible causes:
+    > Hardware limitations (processor, CPU, hard drive)
+    > Too much animations
+    > Bad code: Memory leak, unintended calling of functions, bad coding practices...
+  - Solutions:
+    > Rescoped MutationObserver, which called functions to process data inside IndexedDB.
+
+-> Fetched images > On switching background images or slider images: Images take too long to load.
+  - Possible causes:
+    > Bad network status
+  - Solutions:
+    > Convert the already-fetched background images into base64 urls to stop depending on the network for image loading.

@@ -56,8 +56,8 @@ previousImageButton.addEventListener("click", previousSliderImage);
 const nextImageButton = document.getElementById("next_image_button");
 nextImageButton.addEventListener("click", nextSliderImage);
 
-const hideSliderButton = document.getElementById("back_to_galleries_button");
-hideSliderButton.addEventListener("click", hideSlider);
+const backToGalleriesButton = document.getElementById("back_to_galleries_button");
+backToGalleriesButton.addEventListener("click", hideSlider);
 
 const selectGalleryButton = document.getElementById("select_gallery_button");
 selectGalleryButton.addEventListener("click", setFetchedImagesAsBackground);

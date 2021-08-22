@@ -23,12 +23,13 @@ let onSave = false;
 const listContainer = document.getElementById("list_div");
 const saveObserver = new MutationObserver(saveDataHandler);
 saveObserver.observe(listContainer, {
-  attributes: true,
+  subtree: true,
   childList: true,
-  subtree: true
+  attributeFilter: ["value", "checked"]
 });
 
-export function saveDataHandler() {
+export function saveDataHandler(mutationsList) {
+  console.log(mutationsList);
   if (!onSave) {
     onSave = true;
     setTimeout(() => {
@@ -121,6 +122,7 @@ export function checkTask(taskId) {
   } else {
     taskDiv.classList.remove("is-task-completed");
   }
+  checkElement.setAttribute("checked", checkElement.checked);
   ToDo.currentList.checkTask(taskId, checkElement.checked);
 }
 
@@ -137,7 +139,11 @@ export function watchTaskOrder() {
 
 let createListButton = document.getElementById("create_list_button");
 createListButton.addEventListener("click", () => {
+  createListButton.classList.add("is-button-disabled");
   ToDo.createList();
+  setTimeout(() => {
+    createListButton.classList.remove("is-button-disabled");
+  }, 1100);
 });
 
 export function switchToList(listId) {

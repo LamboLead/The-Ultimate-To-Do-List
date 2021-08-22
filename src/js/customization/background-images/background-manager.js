@@ -20,6 +20,10 @@ class BackgroundManager {
     
     if (newImages.length === 0) {
       console.log("No images whatsoever!");
+    }
+    if (!this.animations) {
+      this.animations = true;
+      DatabaseInfoModule.saveInfo(database, "Custom preferences", {key: "animations", value: this.animations});
       return;
     }
 
@@ -32,6 +36,7 @@ class BackgroundManager {
       this.animations
     );
   }
+
   /**
    * Sets the specified images as background and saves them in the database
    * @param {Array<Object>} imagesArr Array of Background Images
@@ -68,8 +73,12 @@ class BackgroundManager {
 
   setAnimations(animationMode) {
     this.animations = animationMode;
-    
-    let currentImageAnimation = this.backgroundImages[this.currentImageIndex].animation;
+    let currentImageAnimation;
+    try {
+      currentImageAnimation = this.backgroundImages[this.currentImageIndex].animation;
+    } catch (e) {
+      currentImageAnimation = "large-horizontal";
+    }
     RenderingModule.setAnimation(currentImageAnimation); // IMPORTANT: Figure out a way to pass the animation mode as a parameter
     DatabaseInfoModule.saveInfo(database, "Custom preferences", {key: "animations", value: this.animations});
   }

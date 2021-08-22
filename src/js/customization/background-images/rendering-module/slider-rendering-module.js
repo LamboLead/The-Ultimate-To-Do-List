@@ -1,11 +1,21 @@
 import BackgroundManager from '../background-manager.js';
 
 export default async function previewFetchedImages(whichGallery, backgroundImagesArr) {
+  keepBackgroundSettingsOpened(true);
   showLoader();
   setUpSlider(whichGallery, backgroundImagesArr);
 }
 
 // Functions to show/hide slider
+
+function keepBackgroundSettingsOpened(boolean) {
+  let backgroundSettingsDiv = document.getElementById("background_settings_div");
+  if (boolean) {
+    backgroundSettingsDiv.classList.add("is-div-temporally-shown");
+  } else {
+    backgroundSettingsDiv.classList.remove("is-div-temporally-shown");
+  }
+}
 
 /**
  * Displays the loader div, hiding the galleries div
@@ -27,12 +37,10 @@ function showSlider() {
   let galleriesDiv = document.getElementById("background_galleries_div");
   let loaderDiv = document.getElementById("slider_loader_div");
   let sliderDiv = document.getElementById("slider_div");
-  let selectGalleryButton = sliderDiv.querySelector("#select_gallery_button");
   
   galleriesDiv.classList.add("is-div-hidden");
   loaderDiv.classList.add("is-div-hidden");
   sliderDiv.classList.remove("is-div-hidden");
-  selectGalleryButton.classList.remove("is-button-disabled");
 }
 
 /**
@@ -119,6 +127,7 @@ function setUpSlider(whichGallery, imagesArr) {
         showSlider();
         updateSlider();
         moveToImageInSlider(1);
+        keepBackgroundSettingsOpened(false);
       };
     }
   });
@@ -214,8 +223,7 @@ export function previousSliderImage() {
 // Functions to set or discard fetched images as background
 
 export function setFetchedImagesAsBackground() {
-  let selectGalleryButton = document.querySelector("#select_gallery_button");
-  selectGalleryButton.classList.add("is-button-disabled");
+  hideSlider();
 
   slider.images.pop();
   slider.images.shift();

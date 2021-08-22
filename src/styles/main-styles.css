@@ -100,17 +100,21 @@ body {
   @keyframes large-horizontal {
     0% {
       background-position: top;
+      background-size: 115%;
     }
     100% {
       background-position: bottom;
+      backgroud-size: 100%;
     }
   }
   @keyframes general-horizontal {
     0% {
-      background-position-x: top;
+      background-position: top left;
+      background-size: 110%;
     }
     100% {
-      background-position-x: bottom;
+      background-position: bottom right;
+      background-size: 100%;
     }
   }
   @keyframes square {
@@ -123,18 +127,24 @@ body {
   }
   @keyframes general-vertical {
     0% {
-      background-position: left;
+      background-position: center left;
+      background-size: 110%;
+    }
+    50% {
+      background-position: bottom center;
     }
     100% {
-      background-position: right;
+      background-position: center right;
+      background-size: 100%;
     }
   }
   @keyframes large-vertical {
     0% {
-      background-position: top;
+      background-position: center left;
+      background-size: 110%;
     }
     100% {
-      background-position: bottom;
+      background-position: bottom right;
     }
   }
 }
@@ -636,7 +646,7 @@ a:hover {
   position: absolute;
   z-index: 10;
   width: 19rem;
-  height: 29rem;
+  height: 27rem;
   padding: 0.3rem;
   border: 1px solid var(--secondBorderColor);
   border-right: 2px solid var(--mainBorderColor);
@@ -651,7 +661,7 @@ a:hover {
 }
 @media (min-width: 0px) and (max-width: 500px) {
   #background_settings_div {
-    top: -29.85rem;
+    top: -27.85rem;
     left: -5rem;
   }
 }
@@ -661,21 +671,35 @@ a:hover {
     left: -19.5rem;
   }
 }
+#background_settings_div .settings-title-span {
+  display: block;
+  width: 100%;
+  height: 5%;
+  margin-bottom: 1rem;
+  text-align: center;
+}
 
 #background_div:hover + #background_settings_div {
   display: flex;
+  opacity: 1 !important;
+  pointer-events: all !important;
 }
 
 #background_settings_div:hover {
   display: flex;
 }
 
+#user_images_div {
+  width: 100%;
+  height: 10%;
+}
+
 #select_files_fake {
   display: block;
-  margin-bottom: 0.1rem;
+  margin-inline: auto;
+  margin-block: auto;
   width: 80%;
-  height: 7%;
-  padding: 0.2rem;
+  height: 90%;
   border: 1px solid var(--secondBorderColor);
   border-right: 2px solid var(--secondBorderColor);
   border-bottom: 2px solid var(--secondBorderColor);
@@ -688,15 +712,26 @@ a:hover {
   border-color: var(--mainBorderColor);
 }
 
-#background_galleries_div {
+#galleries_loader_slider_div {
+  position: relative;
   width: 100%;
   height: 70%;
   border-top: 1px solid var(--secondBorderColor);
+}
+
+#background_galleries_div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   transition: opacity 500ms ease, height 500ms ease;
 }
 #background_galleries_div .background-label-span {
   display: block;
-  margin: 0rem;
+  margin-left: 0.5rem;
+  margin-bottom: 0.5rem;
   width: 100%;
   height: 1rem;
   font-size: 1rem;
@@ -705,25 +740,23 @@ a:hover {
   position: relative;
   top: 0.2rem;
   margin-inline: 0.7ch;
+  margin-inline-end: 2ch;
   width: auto;
   height: 100%;
   fill: var(--fontColor);
 }
 #background_galleries_div .selected-backgrounds-div {
-  display: none;
-  position: relative;
-  top: 0.5rem;
   margin-inline: auto;
   width: 100%;
-  height: 88%;
+  height: 75%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 #background_galleries_div .selected-backgrounds-div .sample-image-div {
-  margin: 0.2rem;
   width: 46%;
-  height: 43%;
+  height: 45%;
+  margin-inline: 0.2rem;
   border: 1px solid var(--secondBorderColor);
   border-right: 1px solid var(--mainBorderColor);
   border-bottom: 1px solid var(--mainBorderColor);
@@ -733,10 +766,10 @@ a:hover {
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  transition: transform 200ms ease, border-right 200ms ease, border-bottom 200ms ease;
+  transition: transform 200ms ease;
 }
 #background_galleries_div .selected-backgrounds-div .sample-image-div:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
   border-right: 2px solid var(--mainBorderColor);
   border-bottom: 2px solid var(--mainBorderColor);
 }
@@ -754,23 +787,22 @@ a:hover {
 }
 
 #slider_loader_div {
-  position: relative;
+  position: absolute;
   width: 100%;
-  height: 70%;
-  border-top: 1px solid var(--secondBorderColor);
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  transition: opacity 500ms ease, height 500ms ease;
+  transition: opacity 500ms ease-in;
 }
 
 #slider_div {
-  position: relative;
+  position: absolute;
   z-index: 10;
   width: 100%;
-  height: 70%;
+  height: 100%;
   border-top: 1px solid var(--secondBorderColor);
   padding-top: 0.2rem;
   display: flex;
@@ -778,7 +810,7 @@ a:hover {
   justify-content: space-evenly;
   align-items: center;
   cursor: default;
-  transition: opacity 500ms ease, height 500ms ease;
+  transition: opacity 500ms ease;
 }
 
 #slider_container_div {
@@ -882,8 +914,9 @@ a:hover {
 
 #enable_animations_div {
   width: 100%;
-  height: 2rem;
-  padding-top: 0.5rem;
+  height: 10%;
+  margin-top: auto;
+  padding-top: 0.3rem;
   border-top: 1px solid var(--secondBorderColor);
   display: flex;
   flex-direction: row;
@@ -1298,10 +1331,14 @@ a:hover {
 
 .is-div-hidden {
   margin: 0 !important;
-  height: 0 !important;
   padding: 0 !important;
   opacity: 0 !important;
-  border: none !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+}
+
+.is-div-partially-hidden {
+  opacity: 0.5 !important;
   pointer-events: none !important;
 }
 
@@ -1309,6 +1346,16 @@ a:hover {
   opacity: 0.6 !important;
   cursor: default !important;
   pointer-events: none !important;
+}
+
+.is-div-temporally-shown {
+  display: flex !important;
+  pointer-events: none;
+  opacity: 0;
+}
+.is-div-temporally-shown:hover {
+  opacity: 1;
+  pointer-events: all;
 }
 
 .is-list-selected {
