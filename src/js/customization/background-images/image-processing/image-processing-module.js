@@ -65,17 +65,15 @@ export async function processApiImages(whichGallery) {
 
   // console.log(fetchedImages);
 
-  let newImages = fetchedImages.map((image) => {
+  let newImages = fetchedImages.map(async (image) => {
+    let imageUrl = await getBase64FromUrl(image.urls.raw);
     return new BackgroundImage(
-      image.urls.raw,
+      imageUrl,
       {imgWidth: image.width, imgHeight: image.height},
-      {userName: image.user.username, userProfile: image.user.links.html}
+      {userName: image.user.userName, userProfile: image.user.links.html}
     );
   });
-
-  // console.log(newImages);
-
-  return newImages;
+  return await Promise.all(newImages);
 }
 
 /**
@@ -89,4 +87,15 @@ async function getFetch(url, parameters = {}) {
     return `${eachParam[0]}=${eachParam[1]}`;
   }).join('&');
   return await fetch(`${url}?${queryString}`).then((response) => response.json());
+}
+
+async function getBase64FromUrl(imgUrl) {
+  let image = await (await fetch(imgUrl)).blob();
+  return new Promise((resolve) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(image);
+    reader.addEventListener("load", () => {
+      resolve(reader.result);
+    });
+  });
 }

@@ -1,13 +1,12 @@
 import BackgroundManager from '../background-manager.js';
 
-export default async function previewFetchedImages(whichGallery, backgroundImagesArr) {
-  keepBackgroundSettingsOpened(true);
-  showLoader();
-  setUpSlider(whichGallery, backgroundImagesArr);
-}
-
 // Functions to show/hide slider
 
+/**
+ * Keeps the background settings opened but hidden depending on the specified parameter. This is for JS to detect the size of the slider accordingly.
+ * @function keepBackgroundSettingsOpened 
+ * @param {boolean} boolean Boolean to keep or not background settings open
+ */
 function keepBackgroundSettingsOpened(boolean) {
   let backgroundSettingsDiv = document.getElementById("background_settings_div");
   if (boolean) {
@@ -21,9 +20,10 @@ function keepBackgroundSettingsOpened(boolean) {
  * Displays the loader div, hiding the galleries div
  * @function showLoader
  */
-function showLoader() {
+export function showLoader() {
   let galleriesDiv = document.getElementById("background_galleries_div");
   let loaderDiv = document.getElementById("slider_loader_div");
+  keepBackgroundSettingsOpened(true);
 
   galleriesDiv.classList.add("is-div-hidden");
   loaderDiv.classList.remove("is_div-hidden");
@@ -55,7 +55,7 @@ export function hideSlider() {
   sliderDiv.classList.add("is-div-hidden");
 }
 
-// Functions to set up the slider and interact with it
+// --- Functions to set up the slider and interact with it
 
 const slider = {
   currentImageIndex: 0,
@@ -70,9 +70,8 @@ const slider = {
  * @param {string} whichGallery Name of the gallery to render as the title of the slider
  * @param {Array<Object>} imagesArr Array of BackgroundImages to render inside the slider
  */
-function setUpSlider(whichGallery, imagesArr) {
+export function setUpSlider(whichGallery, imagesArr) {
   // Sets all received images into the slider, then shows the slider
-
   let sliderFrame = document.getElementById("slider_container_div");
   let sliderImagesContainer = sliderFrame.querySelector("#images_container_div");
 
@@ -124,10 +123,10 @@ function setUpSlider(whichGallery, imagesArr) {
       console.log(loadedImages, "image has loaded!");
       if (loadedImages === imagesArr.length) {
         changeSliderTitle(whichGallery);
-        showSlider();
         updateSlider();
         moveToImageInSlider(1);
         keepBackgroundSettingsOpened(false);
+        showSlider();
       };
     }
   });
@@ -220,7 +219,7 @@ export function previousSliderImage() {
   moveToImageInSlider(slider.currentImageIndex);
 }
 
-// Functions to set or discard fetched images as background
+// --- Functions to set or discard fetched images as background
 
 export function setFetchedImagesAsBackground() {
   hideSlider();

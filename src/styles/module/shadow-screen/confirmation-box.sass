@@ -13,13 +13,13 @@
   border-radius: 5px
 
   pointer-events: none
-  transform: translateY(50%) scale(0)
+  transform: sscale(0)
 
   transition: transform 500ms ease
 
   @include screen-width-between($desktop...)
     width: 30vw
-    height: 40vh
+    height: 30vh
 
   @include screen-width-between($phone...)
     width: 90vw
@@ -34,17 +34,18 @@
   width: 95%
   height: 15%
 
-  color: black
+  color: var(--fontColor)
   font-weight: bold
-  font-size: 1.5rem
+  font-size: 1.7rem
   border-bottom: 1px solid var(--secondBorderColor)
-  // background-color: aqua
 
 #confirmation_description
   width: 95%
   height: 30%
 
-  // background-color: red
+  font-size: 1.5rem
+  text-align: center
+  color: var(--mainBorderColor)
 
 #confirmation_button_container
   width: 100%
@@ -63,6 +64,8 @@
     border-right-width: 2px
     border-bottom-width: 2px
     border-radius: 3px
+
+    background-color: var(--innerTaskColor)
 
     font-size: 1.1rem
     cursor: pointer

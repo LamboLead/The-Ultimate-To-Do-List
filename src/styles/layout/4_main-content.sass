@@ -1,14 +1,18 @@
 #main_content_div
-    order: 1
+	order: 1
 
-    position: relative
-    margin: 0.5rem auto
+	position: relative
+	margin: 0.5rem auto
 
-    display: flex
-    flex-direction: column
-    justify-content: center
-    align-items: center
+	display: flex
+	flex-direction: column
+	justify-content: center
+	align-items: center
 
-    @include screen-width-between($desktop...)
-        width: 80vw
-        height: 97vh
+	@include screen-width-between($desktop...)
+		width: 80vw
+		height: 97vh
+
+	@include screen-width-between($phone...)
+		width: 100vw
+		height: 90vh

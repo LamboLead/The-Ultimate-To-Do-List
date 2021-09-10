@@ -1,92 +1,102 @@
 .task-div
-    margin: 0.2rem
-    width: 95%
-    height: 12%
-    padding: 0px 0.3rem
-    border: 1px solid var(--secondBorderColor)
-    border-radius: 5px
-    display: flex
-    flex-direction: row
-    justify-content: space-evenly
-    align-items: center
-    
-    background-color: var(--mainContainerColor)
-    transform: translateY(-2rem)
-    opacity: 0
+	margin: 0.2rem
+	width: 95%
+	height: 12%
+	padding: 0px 0.3rem
+	border: 1px solid var(--secondBorderColor)
+	border-radius: 5px
+	display: flex
+	flex-direction: row
+	justify-content: space-evenly
+	align-items: center
+	
+	background-color: var(--mainContainerColor)
+	transform: translateY(-2rem)
+	opacity: 0
 
-    transition: border 300ms ease
+	transition: border 300ms ease
 
-    &:hover
-        border-right: 2px solid var(--mainBorderColor)
-        border-bottom: 2px solid var(--mainBorderColor)
+	&:hover
+		border-right: 2px solid var(--mainBorderColor)
+		border-bottom: 2px solid var(--mainBorderColor)
 
-    .grip-task
-        margin-inline: 1rem
-        font-size: 1.1rem
-        color: var(--secondBorderColor)
-        cursor: grab
+	.grip-task
+		margin-inline: 1rem
+		font-size: 1.1rem
+		color: var(--secondBorderColor)
+		cursor: grab
+		@include screen-width-between($desktop...)
+			font-size: 1.3rem
 
-    [type="checkbox"]
-        margin-right: 1.5ch
-        width: 1.3rem
-        height: 1.3rem
-        cursor: pointer
+	[type="checkbox"]
+		margin-right: 1.5ch
+		width: 1.3rem
+		height: 1.3rem
+		cursor: pointer
+		@include screen-width-between($desktop...)
+			width: 1.5rem
+			height: 1.5rem
 
-    .task-content-input
-        max-width: 800px
-        width: 60%
-        height: 60%
+	.task-content-input
+		width: 60%
+		height: 60%
 
-        padding-left: 1ch
-        flex: 1 4 200px
-        border-width: 0px
-        border-left: 1px solid var(--mainBorderColor)
-        border-radius: 0px
-        background-color: var(--innerTaskColor)
+		padding-left: 1ch
+		flex: 1 4 200px
+		border-width: 0px
+		border-left: 1px solid var(--mainBorderColor)
+		border-radius: 0px
+		background-color: var(--innerTaskColor)
 
-        font-size: 1.1rem
-        color: var(--fontColor)
+		font-size: 1.1rem
+		color: var(--fontColor)
 
-    .task-button
-        margin: 0.6rem 0.3rem
-        max-width: 150px
-        height: 70%
-        border-width: 1px
-        border-radius: 4px
-        background-color: var(--innerTaskColor)
-        cursor: pointer
-        flex: 1 2 auto
-        align-self: center
-        display: flex
-        flex-direction: row
-        justify-content: center
-        align-items: center
+		@include screen-width-between($desktop...)
+			width: 75%
 
-        &:hover
-            transition: transform 300ms ease-in
-            transform: scale(1.05)
+	.task-button
+		margin: 0.6rem 0.3rem
+		max-width: 150px
+		height: 70%
+		border-width: 1px
+		border-radius: 4px
+		background-color: var(--innerTaskColor)
+		cursor: pointer
+		flex: 1 2 auto
+		align-self: center
+		display: flex
+		flex-direction: row
+		justify-content: center
+		align-items: center
 
-            .text-button-span
-                width: 7ch
+		&:hover
+			transition: transform 300ms ease-in
+			transform: scale(1.05)
+
+			.text-button-span
+				width: 7ch
 
 .fa-trash-alt
-    font-size: 1.3rem
-    pointer-events: none
-    justify-self: end
+	font-size: 1.3rem
+	pointer-events: none
+	justify-self: end
 
 .text-button-span
-    @include screen-width-between($desktop...)
-        display: block
-        width: 0px
-        color: inherit
-        font-size: 1.2rem
-        overflow: hidden
-        pointer-events: none
-        transition: width 200ms ease
+	@include screen-width-between($desktop...)
+		display: block
+		width: 0px
+		color: inherit
+		font-size: 1.2rem
+		overflow: hidden
+		pointer-events: none
+		transition: width 200ms ease
+
+	@include screen-width-between($phone...)
+		display: none
 
 .delete-task-button
-    border-color: var(--delete) !important
-    border-right: 2px solid var(--delete) !important
-    border-bottom: 2px solid var(--delete) !important
-    color: var(--delete) !important
-    z-index: 7 !important
+	border-color: var(--delete) !important
+	border-right: 2px solid var(--delete) !important
+	border-bottom: 2px solid var(--delete) !important
+	color: var(--delete) !important
+	z-index: 7 !important

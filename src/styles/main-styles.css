@@ -11,6 +11,7 @@
   --taskEditBorderColor: rgb(180, 180, 0);
   --taskCompleteColor: rgba(100, 255, 0, 0.5);
   --taskCompleteBorderColor: rgb(100, 150, 0);
+  --mixBlendMode: lighten;
   --enter: rgb(30, 200, 0);
   --clear: rgb(220, 30, 30);
   --edit: rgb(90, 90, 255);
@@ -77,18 +78,18 @@ body {
   }
   @keyframes general-vertical {
     0% {
-      background-position: left;
+      background-position: center;
     }
     100% {
-      background-position: right;
+      background-position: center;
     }
   }
   @keyframes large-vertical {
     0% {
-      background-position: left;
+      background-position: center;
     }
     100% {
-      background-position: right;
+      background-position: center;
     }
   }
 }
@@ -127,24 +128,21 @@ body {
   }
   @keyframes general-vertical {
     0% {
-      background-position: center left;
+      background-position: 25% left;
       background-size: 110%;
     }
-    50% {
-      background-position: bottom center;
-    }
     100% {
-      background-position: center right;
+      background-position: 75% right;
       background-size: 100%;
     }
   }
   @keyframes large-vertical {
     0% {
-      background-position: center left;
+      background-position: 15% left;
       background-size: 110%;
     }
     100% {
-      background-position: bottom right;
+      background-position: 75% right;
     }
   }
 }
@@ -248,6 +246,12 @@ a:hover {
   #main_content_div {
     width: 80vw;
     height: 97vh;
+  }
+}
+@media (min-width: 0px) and (max-width: 500px) {
+  #main_content_div {
+    width: 100vw;
+    height: 90vh;
   }
 }
 
@@ -961,18 +965,23 @@ a:hover {
 }
 
 #start_slogan {
-  display: block;
   position: relative;
-  left: 0px;
-  width: 100%;
-  font-size: 4rem;
+  height: 0;
+  padding: 0;
+  margin: 0;
   font-weight: bold;
-  color: white;
+  text-align: left;
+  background-color: var(--popUpColor);
+  border-radius: 10px;
+  mix-blend-mode: var(--mixBlendMode);
   transform: scale(0);
   opacity: 0;
-  height: 0;
-  margin-block: 0;
   transition: transform 800ms ease, opacity 800ms ease;
+}
+#start_slogan span {
+  display: block;
+  margin-inline: 1rem;
+  color: var(--fontColor);
 }
 
 #to_do_div {
@@ -1091,14 +1100,24 @@ a:hover {
   color: var(--secondBorderColor);
   cursor: grab;
 }
+@media (min-width: 501px) and (max-width: 4000px) {
+  .task-div .grip-task {
+    font-size: 1.3rem;
+  }
+}
 .task-div [type=checkbox] {
   margin-right: 1.5ch;
   width: 1.3rem;
   height: 1.3rem;
   cursor: pointer;
 }
+@media (min-width: 501px) and (max-width: 4000px) {
+  .task-div [type=checkbox] {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
 .task-div .task-content-input {
-  max-width: 800px;
   width: 60%;
   height: 60%;
   padding-left: 1ch;
@@ -1109,6 +1128,11 @@ a:hover {
   background-color: var(--innerTaskColor);
   font-size: 1.1rem;
   color: var(--fontColor);
+}
+@media (min-width: 501px) and (max-width: 4000px) {
+  .task-div .task-content-input {
+    width: 75%;
+  }
 }
 .task-div .task-button {
   margin: 0.6rem 0.3rem;
@@ -1148,6 +1172,11 @@ a:hover {
     overflow: hidden;
     pointer-events: none;
     transition: width 200ms ease;
+  }
+}
+@media (min-width: 0px) and (max-width: 500px) {
+  .text-button-span {
+    display: none;
   }
 }
 
@@ -1261,13 +1290,13 @@ a:hover {
   border-bottom: 3px solid var(--mainBorderColor);
   border-radius: 5px;
   pointer-events: none;
-  transform: translateY(50%) scale(0);
+  transform: sscale(0);
   transition: transform 500ms ease;
 }
 @media (min-width: 501px) and (max-width: 4000px) {
   #confirmation_box {
     width: 30vw;
-    height: 40vh;
+    height: 30vh;
   }
 }
 @media (min-width: 0px) and (max-width: 500px) {
@@ -1284,15 +1313,18 @@ a:hover {
   text-align: center;
   width: 95%;
   height: 15%;
-  color: black;
+  color: var(--fontColor);
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   border-bottom: 1px solid var(--secondBorderColor);
 }
 
 #confirmation_description {
   width: 95%;
   height: 30%;
+  font-size: 1.5rem;
+  text-align: center;
+  color: var(--mainBorderColor);
 }
 
 #confirmation_button_container {
@@ -1310,6 +1342,7 @@ a:hover {
   border-right-width: 2px;
   border-bottom-width: 2px;
   border-radius: 3px;
+  background-color: var(--innerTaskColor);
   font-size: 1.1rem;
   cursor: pointer;
   transition: transform 200ms ease;
@@ -1386,8 +1419,27 @@ a:hover {
 .on-start-page #start_slogan {
   transform: scale(1) !important;
   opacity: 0.7 !important;
-  height: 20% !important;
   margin-block: 2rem !important;
+  padding: 0.5rem 1rem !important;
+  height: 20% !important;
+}
+@media (min-width: 0px) and (max-width: 500px) {
+  .on-start-page #start_slogan {
+    width: 90% !important;
+  }
+  .on-start-page #start_slogan span {
+    margin-block: 0.5rem !important;
+    font-size: 3rem !important;
+  }
+}
+@media (min-width: 501px) and (max-width: 4000px) {
+  .on-start-page #start_slogan {
+    width: 97% !important;
+  }
+  .on-start-page #start_slogan span {
+    margin-block: 1rem;
+    font-size: 3.5rem;
+  }
 }
 .on-start-page #to_do_div {
   height: 12% !important;

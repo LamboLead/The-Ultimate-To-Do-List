@@ -35,11 +35,14 @@
 
 * Styling
 
-- In progress
+- Done!
 -> Fix responsiveness
--> Fix vertical animations
 -> Fix colors for confirmation box
+-> Fix vertical animations
+
+- In progress
 -> Fix organizing background settings
+-> Set up pop-up
 
 * Issues
 

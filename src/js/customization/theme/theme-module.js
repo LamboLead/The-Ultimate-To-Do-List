@@ -32,7 +32,8 @@ function renderTheme(newTheme) {
 			"taskCompleteBorderColor": ["rgb(100, 150, 0)", "rgb(100, 255, 0)"],
 			"taskEditColor": ["rgba(255, 255, 0, 0.5)", "rgba(255, 255, 0, 0.2)"],
 			"taskCompleteColor": ["rgba(100, 255, 0, 0.5)", "rgba(100, 255, 0, 0.2)"],
-			"fontColor": ["rgb(20, 20, 20)", "rgb(210, 210, 210)"]
+			"fontColor": ["rgb(20, 20, 20)", "rgb(210, 210, 210)"],
+			"mixBlendMode": ["lighten", "darken"]
 	};
 	for (let property in themes) {
 			root.style.setProperty(`--${property}`, themes[property][reference]);

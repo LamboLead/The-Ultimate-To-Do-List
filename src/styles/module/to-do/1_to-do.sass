@@ -1,20 +1,27 @@
 #start_slogan
-    display: block
     position: relative
-    left: 0px
+    height: 0
+    padding: 0
+    margin: 0
 
-    width: 100%
-
-    font-size: 4rem
     font-weight: bold
-    color: white
+    text-align: left
+
+    background-color: var(--popUpColor)
+    border-radius: 10px
+
+    mix-blend-mode: var(--mixBlendMode)
 
     transform: scale(0)
     opacity: 0
-    height: 0
-    margin-block: 0
     transition: transform 800ms ease, opacity 800ms ease
-    
+
+    span
+        display: block
+        margin-inline: 1rem
+        color: var(--fontColor)
+
+            
 #to_do_div
     border: 1px solid var(--secondBorderColor)
     border-right: 3px solid var(--mainBorderColor)

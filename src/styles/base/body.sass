@@ -45,15 +45,15 @@ body
 
 		@keyframes general-vertical
 			0%
-				background-position: left
+				background-position: center
 			100%
-				background-position: right
+				background-position: center
 
 		@keyframes large-vertical
 			0%
-				background-position: left
+				background-position: center
 			100%
-				background-position: right
+				background-position: center
 
 	@include screen-width-between($desktop...)
 		background-size: 100%
@@ -83,20 +83,18 @@ body
 
 		@keyframes general-vertical
 			0%
-				background-position: center left
+				background-position: 25% left
 				background-size: 110%
-			50%
-				background-position: bottom center
 			100%
-				background-position: center right
+				background-position: 75% right
 				background-size: 100%
 
 		@keyframes large-vertical
 			0%
-				background-position: center left
+				background-position: 15% left
 				background-size: 110%
 			100%
-				background-position: bottom right
+				background-position: 75% right
 
 @keyframes animations-disabled
 	0%

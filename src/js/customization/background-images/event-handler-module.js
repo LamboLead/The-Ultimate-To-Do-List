@@ -5,7 +5,7 @@
 import * as ImageProcessingModule from './image-processing/image-processing-module.js';
 import * as EventHandlingModule from '../../event-handling-module.js';
 import BackgroundManager from "./background-manager.js";
-import showSlider from "./rendering-module/slider-rendering-module.js";
+import * as SliderRenderingModule from "./rendering-module/slider-rendering-module.js";
 
 // Set up animationiteration event listener for image changing
 const body = document.querySelector("body");
@@ -39,10 +39,13 @@ groupOfGalleries.forEach((gallery) => {
   gallery.addEventListener("click", async () => {
     let imageCategory = gallery.querySelector(".sample-image-span").innerHTML;
     // console.log(imageCategory);
-
+    SliderRenderingModule.showLoader();
+    // await new images
+    // show slider
+    // Show loader
     // Call function to open slider
     let newImages = await ImageProcessingModule.processApiImages(imageCategory);
-    showSlider(imageCategory, newImages);
+    SliderRenderingModule.setUpSlider(imageCategory, newImages);
   });
 });
 
