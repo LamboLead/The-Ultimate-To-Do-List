@@ -4,10 +4,17 @@ In this document, all the things that I've learned related to web development an
 
 My goal by developing "The Ultimate To-Do list" is to apply all of that knowledge inside of this project. This will make me a better-more mature developer for the years to come.
 
-Folder structuring for web development.
-Git workflow
-Document code with JSDoc
+* General
 
-* ...
+> Folder structuring for web development.
+> Git workflow.
+> Document code easily and productively with JSDoc.
 
-* 
+* File management
+
+> Optimize webpages by rescaling and downsizing the images that they work with.
+
+* Styling
+
+> 
+

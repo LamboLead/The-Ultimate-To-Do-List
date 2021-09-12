@@ -92,6 +92,10 @@
 
 -> Fetched images > On switching background images or slider images: Images take too long to load.
   - Possible causes:
-    > Bad network status
+    > Slow network.
   - Solutions:
     > Convert the already-fetched background images into base64 urls to stop depending on the network for image loading.
+
+-> Background images > On loading/refreshing page: Images don't load as background, despite being stored in database.
+  - Possible causes:
+    > Background manager is not setting the images as background on starting the page.
