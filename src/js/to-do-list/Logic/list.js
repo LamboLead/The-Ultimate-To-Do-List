@@ -1,16 +1,10 @@
-/**
- * This is the list module for To-do list functionality.<br>
- * It stores and exports a class definition for a List object as default.<br>
- * Imports from {@link module: To-do/task}
- * @module To-do/list
- */
-
 import * as RenderingModule from '../rendering/list-rendering-module.js';
 import Task from './task.js';
 
 /**
  * Class to create a List object
- * @class
+ * Imports: {@link module:Rendering/state-rendering module|state-rendering (module)}
+ * @class List
  */
 class List {
 
@@ -33,7 +27,6 @@ class List {
 	/**
 	 * Updates the name of the list to the received one
 	 * @param {string} newName New name of the list
-	 * @returns {void}
 	 */
 	updateName(newName) {
 		this.name = newName;
@@ -116,13 +109,6 @@ class List {
 	}
 }
 
-/**
- * Orders an array of objects according to the specified parameter
- * @function sortItems
- * @param {Array<Object>} itemsArr The array of items to sort
- * @param {string} orderBy Parameter to sort the array by
- * @returns {Array<Object>} Array with its items sorted
- */
 function sortItems(itemsArr, orderBy) {
 	return itemsArr.sort((item1, item2) => {
 		if (item1[orderBy] < item2[orderBy]) return -1;

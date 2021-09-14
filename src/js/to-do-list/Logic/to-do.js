@@ -1,8 +1,7 @@
 /**
  * This is the to-do module for To-do list functionality.<br>
- * It stores a class for a ToDo object that handles the to-do functionality of the application.<br>
- * It exports a global toDo object as default.<br><br>
- * Imports: {@link database} {@link module:Storage/information-management|information-management module}
+ * It stores a class for a ToDo object that handles the to-do list functionality of the application and some internal functions.<br>
+ * It exports a global ToDo object as default.<br><br>
  * @module To-do/to-do
  */
 
@@ -14,8 +13,8 @@ import Task from './task.js';
 import List from './list.js';
 
 /**
- * Class that create a ToDo object.<br><br>
- * Imports: {@link database}, {@link module:Storage/information-management|information-management module}, {@link module:To-do/rendering|To-do rendering module}
+ * Class that creates a ToDo object.<br><br>
+ * Imports: {@link module:Storage/database|database (object)}, {@link module:Storage/information-management|information-management (module)}, {@link module:To-do/to-do-rendering|to-do-rendering (module)}, {@link module:To-do/state-rendering|state-rendering (module)}, {@link Task|Task (class)}, {@link List|List (class)}
  * @class
  */
 class ToDo {
@@ -33,7 +32,7 @@ class ToDo {
 	}
 
 	/**
-	 * Initializes the application by retrieving all information from the database by calling {@link module:Storage/information-management#retrieveInfo|retrieveInfo} and renders it by calling ...
+	 * Initializes the functionality by retrieving all to-do information from the database and rendering it.
 	 */
 	async initialize() {
 		console.log("Initializing application");
@@ -67,7 +66,7 @@ class ToDo {
 	}
 
 	/**
-		* Saves the app information into the database by calling the saveInfo method from {@link module: information-management}
+		* Saves the app information into the database
 		*/
 	saveData() {
 		if (!this.currentList) {return}
@@ -102,7 +101,7 @@ class ToDo {
 	 * Removes the specified list from the DOM, renders another one, and deletes the specified list from the database
 	 * @param {string} listId The id of the deleted list
 	 */
-	async deleteList(listId) {
+	deleteList(listId) {
 
 		// Delete list from array
 		let listIndex = this.lists.findIndex((id) => id === listId);
@@ -197,7 +196,7 @@ function normalizeList(previousList, fullNormalization) {
  * Searches inside an array of objects and finds the one that matches the provided property-value pair
  * @function findElementIndex
  * @param {Array<Object>} objectsArr Array of objects to perform the searching
- * @param {{prop: string, val:string|number}} parameters Parameters of the object to match
+ * @param {{prop: string, val: string|number}} parameters Parameters of the object to match
  * @returns {number} Index of the element in the array
  */
 function findElementIndex(objectsArr, {prop, val}) {

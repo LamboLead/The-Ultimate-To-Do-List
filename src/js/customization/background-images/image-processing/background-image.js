@@ -7,8 +7,8 @@
  */
 
 /**
- * Class to create a new BackgroundImage
- * @class
+ * Class to create a new BackgroundImage object.
+ * @class BackgroundImage
  */
 class BackgroundImage {
 	/**
@@ -30,6 +30,12 @@ class BackgroundImage {
 		this.animation = null;
 		this.findAnimation(this.dimensions.width, this.dimensions.height);
 	}
+
+	/**
+	 * Finds the correct animation according to the width and height of the image
+	 * @param {number} width Width of the image
+	 * @param {number} height Height of the image
+	 */
 	findAnimation(width, height) {
 		let animationsAspectRatio = {
 			"large-horizontal": [100, 1.4],

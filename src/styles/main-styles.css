@@ -276,7 +276,8 @@ a:hover {
   justify-content: center;
   align-items: center;
   stroke-width: 3;
-  fill: none;
+  fill: #000028;
+  animation: fill-all 0.2s 2.4s ease-in forwards;
 }
 
 #app_name {
@@ -330,7 +331,7 @@ a:hover {
 }
 
 .fill-all {
-  fill: rgba(0, 0, 0, 0);
+  fill: none;
   animation: fill-all 0.2s 2.4s ease-in forwards;
 }
 

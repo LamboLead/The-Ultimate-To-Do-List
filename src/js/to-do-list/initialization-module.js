@@ -1,21 +1,23 @@
 /**
- * This is the initialization module.<br>
- * It stores code related to the initialization of the application.
- * @module Initialization
- */
+ * @file The Ultimate To-do list
+ * @author Juan David López López <juandlopez01@hotmail.com>
+ * @see {@link https://github.com/LamboLead|GitHub @LamboLead}
+ * @copyright Juan David López López - 2021
+ * @version 1.0
+*/
 
-import * as EventHandlingModule from '../event-handling-module.js';
+import * as EventHandlingModule from '../dom-element-handler.js';
 import * as StateRenderingModule from '../to-do-list/rendering/state-rendering-module.js';
 import ToDo from './logic/to-do.js';
 
 // Remove page loader
 
 const pageLoader = document.getElementById("loading_screen_div");
-window.onload = () => {
-    setTimeout(() => {
-        pageLoader.style.setProperty("top", "-100vh");
-    }, 3500);
-}
+// window.onload = () => {
+//     setTimeout(() => {
+//         pageLoader.style.setProperty("top", "-100vh");
+//     }, 3500);
+// }
 
 // Set handler for saving information
 
@@ -78,10 +80,6 @@ createTaskButton.addEventListener("click", () => {
   EventHandlingModule.clearInput("#insert_task");
 });
 
-/**
- * Creates a new task inside the current list with the specified caption
- * @param {string} taskName Caption of the new task
- */
 function createTask(taskName) {
   console.log(taskName);
   if (!ToDo.currentList) {
@@ -90,11 +88,6 @@ function createTask(taskName) {
   ToDo.currentList.createTask(taskName);
 }
 
-/**
- * Removes the specified task from the DOM and calls ...
- * @function deleteTask
- * @param {string} taskId Id of the task to delete
- */
 export function deleteTask(taskId) {
   let taskDiv = document.querySelector(`[data-task-id=${taskId}]`);
   taskDiv.classList.add("is-task-deleted");
@@ -109,11 +102,6 @@ export function editTask(inputValue, taskId) {
   ToDo.currentList.editTask(taskId, inputValue);
 }
 
-/**
- * Reads the state of the specified task and toggles it.
- * @function checkTask
- * @param {string} taskId Id of the checked/unchecked task
- */
 export function checkTask(taskId) {
   let taskDiv = document.querySelector(`[data-task-id=${taskId}]`);
   let checkElement = taskDiv.querySelector('[type="checkbox"]');
@@ -126,10 +114,6 @@ export function checkTask(taskId) {
   ToDo.currentList.checkTask(taskId, checkElement.checked);
 }
 
-/**
- * Scans the order of the tasks and calls...
- * @function watchTaskOrder
- */
 export function watchTaskOrder() {
   let taskOrder = watchElementsOrder(".task-div", "data-task-id");
   ToDo.currentList.rearrangeTasks(taskOrder);
@@ -151,10 +135,6 @@ export function switchToList(listId) {
   ToDo.switchToList(listId);
 }
 
-/**
- * Deletes the specified list if the user states so in the confirmation box
- * @param {string} listId Id of the specified list
- */
 export async function deleteList(listId, listName) {
   let returnValue = await StateRenderingModule.showConfirmationDialog(
     "Delete list",
@@ -173,13 +153,6 @@ export function watchListOrder() {
   ToDo.rearrangeLists(listOrder);
 }
 
-/**
- * Scans the order of the elements with the specified selector in the DOM and returns it in an array
- * @function watchOrder
- * @param {string} elementsQuerySelector CSS selector of the elements you want to track their order
- * @param {string} attributeName Name of the attribute that identifies each element
- * @returns {Array<string>}
- */
 function watchElementsOrder(elementsQuerySelector, attributeName) {
   let elements = document.querySelectorAll(elementsQuerySelector);
   let elementsOrder = [];

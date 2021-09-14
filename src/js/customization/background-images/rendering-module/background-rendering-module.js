@@ -1,3 +1,10 @@
+/**
+ * This is the background-rendering module for Customization functionality.<br>
+ * It exports functions related to the rendering of the background.<br><br>
+ * Imports: {@link BackgroundManager}
+ * @module Customization/background-rendering
+ */
+
 import BackgroundManager from '../background-manager.js';
 
 /**
@@ -14,9 +21,9 @@ export function setBackgroundImage(backgroundImage) {
 }
 
 /**
- * Sets the specified animation to the body
+ * Applies the specified animation to the body
  * @function setAnimation
- * @param {string} imgAnimation Specified animation to set
+ * @param {string} imgAnimation Specified animation to apply
  */
 export function setAnimation(imgAnimation) {
   let animationMode = BackgroundManager.animations;

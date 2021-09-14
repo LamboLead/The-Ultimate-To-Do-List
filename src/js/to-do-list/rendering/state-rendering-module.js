@@ -1,4 +1,10 @@
 /**
+ * This is the state rendering module for To-do list functionality.<br>
+ * It exports different functions that show the user the state of the application.<br><br>
+ * @module To-do/state-rendering
+ */
+
+/**
  * Renders the start page if needed
  * @function showStartPage
  * @param {boolean} indicator Indicator for the start page to be rendered
@@ -15,6 +21,11 @@ export function showStartPage(indicator) {
   }
 }
 
+/**
+ * Renders a shadow screen if needed
+ * @function showShadowScreen
+ * @param {boolean} indicator Indicator for the shadow screen to be rendered
+ */
 export function showShadowScreen(indicator) {
   let shadow = document.getElementById("shadow_screen");
   if (indicator) {
@@ -24,6 +35,11 @@ export function showShadowScreen(indicator) {
   }
 }
 
+/**
+ * Highlights the specified element in red indicating a problem with it
+ * @function highlightElement
+ * @param {string} elementQuerySelector Query selector of the element to highlight
+ */
 export function highlightElement(elementQuerySelector) {
   showShadowScreen(true);
   let highlightedElement = document.querySelector(elementQuerySelector);
@@ -31,7 +47,7 @@ export function highlightElement(elementQuerySelector) {
 }
 
 /**
- * Displays a confirmation box
+ * Displays a confirmation box with the specified buttons
  * @param {string} title Title of the confirmation box when appearing
  * @param {string} info Information to display after the title
  * @param {Array<{buttonName: string, color: string, returnValue: *}>} buttonHandlers Buttons to create with their respective return values
@@ -81,11 +97,11 @@ export async function showConfirmationDialog(title, info, buttonHandlers) {
 }
 
 /**
- * Displays the pop-up alert with the specified message
+ * Displays a pop-up alert with the specified message
  * @function popAppear
  * @param {string} message Message to show inside the pop-up alert
  */
-function popAppear(message) {
+export function popAppear(message) {
 	let alertPop = document.getElementById("pop_up_div");
 	alertPop.innerText = `✅ ${message}`;
 	setTimeout(() => {

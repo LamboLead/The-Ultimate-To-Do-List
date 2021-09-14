@@ -1,8 +1,14 @@
+/**
+ * This is the database module.<br>
+ * It exports an IndexedDB database object.
+ * @module Storage/database
+*/
+
 import * as DatabaseModule from './database-management-module.js';
 
 /**
  * An IndexedDB database object
- * @type {Object}
+ * @type {IDBDatabase}
  */
 const database = await DatabaseModule.openDatabase("The Ultimate To-Do List", 1, [
   {

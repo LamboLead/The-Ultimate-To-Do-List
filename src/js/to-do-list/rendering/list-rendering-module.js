@@ -1,9 +1,14 @@
+/**
+ * This is the list-rendering module for To-do list functionality.<br>
+ * It exports functions related to the rendering of lists and all related elements.<br><br>
+ * @module To-do/list-rendering
+ */
+
 import * as InitializationModule from '../initialization-module.js';
-import * as ToDoRenderingModule from './to-do-rendering-module.js';
 
 /**
  * Updates the name of the list in its corresponding element in the DOM
- * @function setListName
+ * @function setMainListName
  * @param {string} newListName Name for the new list
  */
 export function setMainListName(newListName) {
@@ -11,12 +16,23 @@ export function setMainListName(newListName) {
   listInput.value = newListName;
 }
 
+/**
+ * Renders the name of the specified list in the navbar
+ * @function setNavbarListName
+ * @param {string} listId Id of the required list
+ * @param {string} newListName Name of the list to render
+ */
 export function setNavbarListName(listId, newListName) {
   let listInput = document.querySelector(`[data-list-id=${listId}]`).querySelector(".each-list-input");
   listInput.innerHTML = newListName;
   listInput.title = `Switch to '${newListName}'`;
 }
 
+/**
+ * Renders the specified list as active
+ * @function setListAsActive
+ * @param {string} listId Id of the required list
+ */
 export function setListAsActive(listId) {
   let allLists = document.querySelectorAll("[data-list-id]");
   Array.from(allLists).forEach((list) => list.classList.remove("is-list-selected"));
@@ -83,18 +99,4 @@ export function removeExistingTasks() {
   let taskList = document.getElementById("task_view_div");
   let tasks = taskList.querySelectorAll("div .task-div");
   tasks.forEach((task) => task.remove());
-}
-
-/**
- * Checks if a list already exists in the Navbar
- * @function listAlreadyExists
- * @param {string} listId Id of the list to check its existence
- * @returns {boolean}
- */
-function listAlreadyExists(listId) {
-  let lists = document.getElementById("listing_div");
-  lists.querySelectorAll ("div .each-list-div").forEach((list) => {
-    if (list.id === listId) return true;
-  });
-  return false;
 }

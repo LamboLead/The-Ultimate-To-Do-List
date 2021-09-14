@@ -1,6 +1,13 @@
+/**
+ * This is the slider-rendering module for Customization functionality.<br><br>
+ * It stores functions related to the rendering and the interaction with the slider that previews the background images.<br>
+ * Imports: {@link BackgroundManager}
+ * @module Customization/slider-rendering
+ */
+
 import BackgroundManager from '../background-manager.js';
 
-// Functions to show/hide slider
+// -> -> -> Functions to show/hide slider <- <- <-
 
 /**
  * Keeps the background settings opened but hidden depending on the specified parameter. This is for JS to detect the size of the slider accordingly.
@@ -55,8 +62,16 @@ export function hideSlider() {
   sliderDiv.classList.add("is-div-hidden");
 }
 
-// --- Functions to set up the slider and interact with it
+// -> -> -> Functions to set up the slider and interact with it <- <- <-
 
+/**
+ * @typedef {Object} slider
+ * @property {number} currentImageIndex Current index of the displayed image
+ * @property {number} totalImageNumber Total number of images in the slider
+ * @property {number} frameWidth Width of the frame in pixels
+ * @property {HTMLDivElement} imageContainer Image container for the slider
+ * @property {Array} images HTML image elements inside the container
+ */
 const slider = {
   currentImageIndex: 0,
   totalImageNumber: 0,
@@ -189,6 +204,7 @@ export function setUpSlider(whichGallery, imagesArr) {
 
 /**
  * Shows the specified image into the slider
+ * @function moveToImageInSlider
  * @param {number} imgIndex Index of the image to show
  */
 function moveToImageInSlider(imgIndex) {
@@ -207,20 +223,32 @@ function moveToImageInSlider(imgIndex) {
   }
 }
 
+/**
+ * Shows the next image in the slider
+ * @function nextSliderImage
+ */
 export function nextSliderImage() {
   slider.imageContainer.style.setProperty("transition", "transform 300ms ease");
   slider.currentImageIndex++;
   moveToImageInSlider(slider.currentImageIndex);
 }
 
+/**
+ * Shows the previous image in the slider
+ * @function previousSliderImage
+ */
 export function previousSliderImage() {
   slider.imageContainer.style.setProperty("transition", "transform 300ms ease");
   slider.currentImageIndex--;
   moveToImageInSlider(slider.currentImageIndex);
 }
 
-// --- Functions to set or discard fetched images as background
+// -> -> ->Functions to set or discard fetched images as background <- <- <-
 
+/**
+ * Set the fetched images as background
+ * @function setFetchedImagesAsBackground
+ */
 export function setFetchedImagesAsBackground() {
   hideSlider();
 

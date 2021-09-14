@@ -1,6 +1,6 @@
 /**
  * This is the database-management module.<br>
- * It stores functions related to the opening, store creation and deleting an IndexedDB database.
+ * It stores functions related to the opening, store creation and deletion of an IndexedDB database.
  * @module Storage/database-management
 */
 

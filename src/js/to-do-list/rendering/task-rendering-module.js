@@ -1,4 +1,10 @@
-import * as EventHandlingModule from '../../event-handling-module.js';
+/**
+ * This is the task-rendering module for To-do list functionality.<br>
+ * It exports functions related to the rendering of tasks themselves.<br><br>
+ * @module To-do/task-rendering
+ */
+
+import * as EventHandlingModule from '../../dom-element-handler.js';
 import * as InitializationModule from '../initialization-module.js';
 
 /**

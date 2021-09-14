@@ -1,10 +1,17 @@
-import * as EventHandlingModule from '../../event-handling-module.js';
+/**
+ * This is the theme module for Customization functionality.<br>
+ * It exports functions related to the interaction and modification of the theme of the interface.<br><br>
+ * Imports: {@link module:DOMElementHandler|DOMElementHandler (module)}, {@link module:Storage/database|database (object)}, {@link module:Storage/information-management|information-management (module)}
+ * @module Customization/theme
+ */
+
+import * as DOMElementHandler from '../../dom-element-handler.js';
 import database from '../../storage/database-object.js';
 import * as DatabaseInfoModule from '../../storage/information-management-module.js';
 
 retrieveTheme();
 
-EventHandlingModule.setUpSwitch("change_theme", ".inside-switch-div", {
+DOMElementHandler.setUpSwitch("change_theme", ".inside-switch-div", {
     leftValue: "dark",
     rightValue: "light",
     callback: renderTheme
@@ -52,6 +59,7 @@ function saveTheme(theme) {
 
 /**
  * Retrieves theme from the database and renders it into the page
+ * @async
  * @function retrieveTheme
  */
 async function retrieveTheme() {
@@ -60,7 +68,7 @@ async function retrieveTheme() {
 		newTheme = "light";
 	}
 	renderTheme(newTheme);
-	EventHandlingModule.renderSwitch("change_theme", ".inside-switch-div",
+	DOMElementHandler.renderSwitch("change_theme", ".inside-switch-div",
 		{
 			leftValue: "dark",
 			rightValue: "light"

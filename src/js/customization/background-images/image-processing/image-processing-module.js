@@ -1,9 +1,17 @@
+/**
+ * This is the image-processing module for Customization functionality.<br>
+ * It exports functions that process and normalize external images to use in the application.<br><br>
+ * Imports: {@link BackgroundImage|BackgroundImage (class)}
+ * @module Customization/image-processing
+ */
+
 import BackgroundImage from "./background-image.js";
 
 /**
- * Process the files provided by the user and returns an array of defined custom images
+ * Process the files provided by the user and returns an array of BackgroundImages
  * @function processUserImages
  * @param {Array<Blob>} files Array of files provided by the user
+ * @returns {Promise<Array<BackgroundImage>>}
  */
 export async function processUserImages(files) {
   files = Array.from(files);
@@ -40,6 +48,7 @@ export async function processUserImages(files) {
  * Calls for the Unsplash API to retrieve processed images from the specified gallery
  * @function processApiImages
  * @param {string} whichGallery Name of the gallery to search for
+ * @returns {Promise<Array<BackgroundImage>>}
  */
 export async function processApiImages(whichGallery) {
   let apiUrl = "https://api.unsplash.com/search/photos"
@@ -77,7 +86,8 @@ export async function processApiImages(whichGallery) {
 }
 
 /**
- * 
+ * Creates a url and uses the fetch() API to return an external resource in JSON format
+ * @function getFetch
  * @param {string} url Url of the page to connect to
  * @param {Object} parameters Parameters of the query to search for
  * @returns {Promise<JSON>} JSON object with the results of the query
@@ -89,32 +99,17 @@ async function getFetch(url, parameters = {}) {
   return await fetch(`${url}?${queryString}`).then((response) => response.json());
 }
 
-
-// --> FIX THIS!!! <--
-async function getBase64FromUrl(imgUrl) {
-  let image = await (await fetch(imgUrl)).blob();
-  return new Promise((resolve) => {
-    let reader = new FileReader();
-    reader.readAsArrayBuffer(image);
-    reader.addEventListener("load", () => {
-      console.log(typeof reader.result, reader.result);
-      let blob = new Blob(new DataView(reader.result));
-      let url = window.URL.createObjectURL(blob);
-      let image = document.createElement("img");
-      image.src = url;
-      let canvas = document.createElement("canvas");
-      resolve(reader.result);
-    });
-  });
-}
-
+/**
+ * Fetches the specified image, downsizes it and converts it in a base64 url
+ * @async
+ * @function getBase64
+ * @param {string} imgUrl Web URL of the image
+ * @returns {Promise<string>} Base64 URL of the rescaled image
+ */
 async function getBase64(imgUrl) {
   let imageBlob = await fetch(imgUrl).then((response) => response.blob());
   let image = document.createElement("img");
   image.src = window.URL.createObjectURL(imageBlob);
-  // let canvas = document.createElement("canvas");
-  // [canvas.width, canvas.height] = [image.width, image.height];
-  // let context = canvas.getContext("2d");
   return new Promise((resolve) => {
     image.onload = () => {
       resolve(drawScaledImage(image).toDataURL("image/jpeg", 0.6));
@@ -122,6 +117,12 @@ async function getBase64(imgUrl) {
   });
 }
 
+/**
+ * Draws and rescales the given image in a canvas and returns it
+ * @function drawScaledImage
+ * @param {HTMLImageElement} img Image element to rescale
+ * @returns {HTMLCanvasElement} Canvas containing the rescaled image
+ */
 function drawScaledImage(img) {
   let canvas = document.createElement("canvas");
   let context = canvas.getContext("2d");

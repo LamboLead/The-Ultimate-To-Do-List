@@ -1,7 +1,7 @@
 /**
  * This is the DOM element handler module.<br>
  * It stores functions related to the handling of user events inside the DOM.
- *  @module EventHandling
+ *  @module DOMElementHandler
  */
 
 import * as StateRenderingModule from './to-do-list/rendering/state-rendering-module.js';
@@ -68,7 +68,7 @@ export function clearInput(inputElementSelector) {
  * Checks whether the specified value passes the specified test or not
  * @function validateInput
  * @param {string} value Value inserted by the user
- * @param {string} flag Flag specifying the check type
+ * @param {string} flag Flag specifying the check type. It supports "required" and "regex" flags
  * @param {RegExp} [validatorValue] Regular expression to perform the validation
  * @returns {boolean}
  */
@@ -87,9 +87,9 @@ export function validateInput(value, flag, validatorValue) {
 /**
  * Sets up the specified switch to do something when the user clicks it
  * @function setUpSwitch
- * @param {string} switchFrameId Id of the switch' frame
+ * @param {string} switchFrameId Id of the switch frame
  * @param {string} insideSwitchSelector Query selector of the inside of the switch
- * @param {{leftValue: *, rightValue: *, callback: function}} options Parameters to fuck
+ * @param {{leftValue: *, rightValue: *, callback: function}} options Parameters to set the switch up
  */
 export function setUpSwitch(switchFrameId, insideSwitchSelector, {leftValue, rightValue, callback}) {
   let switchFrame = document.getElementById(switchFrameId);

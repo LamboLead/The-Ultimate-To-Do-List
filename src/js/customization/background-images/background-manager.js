@@ -1,9 +1,15 @@
 import database from '../../storage/database-object.js';
 import * as DatabaseInfoModule from '../../storage/information-management-module.js';
-import * as EventHandlingModule from '../../event-handling-module.js';
+import * as DOMElementHandler from '../../dom-element-handler.js';
 import * as RenderingModule from './rendering-module/background-rendering-module.js';
 
+/**
+ * Class that creates a BackgroundManager object.<br><br>
+ * Imports: {@link module:Storage/database|database (object)}, {@link module:Storage/information-management|information-management (module)}, {@link module:DOMElementHandler|DOMElementHandler (module)}, {@link module:Customization/background-rendering|background-rendering (module)}
+ * @class BackgroundManager
+ */
 class BackgroundManager {
+  /** @constructs */
   constructor() {
     if (!BackgroundManager.instance) {
       this.backgroundImages = null;
@@ -14,6 +20,12 @@ class BackgroundManager {
     this.initialize();
     return BackgroundManager.instance;
   }
+
+  /**
+   * Initializes the functionality by retrieving all background images and animation state from the database and renders them
+   * @async
+   * @function initialize
+   */
   async initialize() {
     let newImages = await DatabaseInfoModule.retrieveInfo(database, "Custom preferences", {query: "backgroundImages"});
     this.animations = (await DatabaseInfoModule.retrieveInfo(database, "Custom preferences", {query: "animations"}))[0];
@@ -28,7 +40,7 @@ class BackgroundManager {
     }
 
     this.setImagesAsBackground(newImages[0]);
-    EventHandlingModule.renderSwitch("switch_animation_div", ".inside-switch-div",
+    DOMElementHandler.renderSwitch("switch_animation_div", ".inside-switch-div",
       {
         leftValue: false,
         rightValue: true,
@@ -51,7 +63,8 @@ class BackgroundManager {
   }
 
   /**
-   * Changes to and renders specified image
+   * Changes to and renders specified background image
+   * @function changeBackgroundImage
    */
   changeBackgroundImage() {
     if (!this.backgroundImages) return;
@@ -71,6 +84,11 @@ class BackgroundManager {
     //   );
   }
 
+
+  /**
+   * Grabs the animation from the current background image and renders it according to the specified animation mode
+   * @param {boolean} animationMode New animation mode
+   */
   setAnimations(animationMode) {
     this.animations = animationMode;
     let currentImageAnimation;
@@ -84,7 +102,6 @@ class BackgroundManager {
   }
 }
 
-// **Learn how to catalog this object as an instance of BackgroundManager**
 const backgroundManager = new BackgroundManager();
 
 export default backgroundManager;

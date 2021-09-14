@@ -21,7 +21,9 @@ $strokeDashArr: (2: 384, 3: 256, 4: 518, 5: 518, 6: 544)
     align-items: center
 
     stroke-width: 3
-    fill: none
+    fill: rgb(0, 0, 40)
+
+    animation: fill-all $animationFillDuration $animationFillDelay ease-in forwards
 
 #app_name
     width: 0
@@ -56,7 +58,7 @@ $strokeDashArr: (2: 384, 3: 256, 4: 518, 5: 518, 6: 544)
             animation: animate-logo $animationLogoDuration $animationLogoDelay * 2 ease forwards
 
 .fill-all
-    fill: rgba(0, 0, 0, 0)
+    fill: none
     animation: fill-all $animationFillDuration $animationFillDelay ease-in forwards
 
 @keyframes animate-logo
@@ -74,5 +76,5 @@ $strokeDashArr: (2: 384, 3: 256, 4: 518, 5: 518, 6: 544)
 
 @keyframes fill-all
     to
-        fill: white
+        fill: rgb(255, 255, 255)
 
