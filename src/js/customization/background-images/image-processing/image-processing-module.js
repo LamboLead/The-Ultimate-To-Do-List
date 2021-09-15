@@ -72,14 +72,12 @@ export async function processApiImages(whichGallery) {
     client_id: clientId
   }).then((data) => data["results"]);
 
-  // console.log(fetchedImages);
-
   let newImages = fetchedImages.map(async (image) => {
     let imageUrl = await getBase64(image.urls.raw);
     return new BackgroundImage(
       imageUrl,
       {imgWidth: image.width, imgHeight: image.height},
-      {userName: image.user.userName, userProfile: image.user.links.html}
+      {userName: image.user.username, userProfile: image.user.links.html}
     );
   });
   return await Promise.all(newImages);

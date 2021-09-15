@@ -30,9 +30,11 @@ function keepBackgroundSettingsOpened(boolean) {
 export function showLoader() {
   let galleriesDiv = document.getElementById("background_galleries_div");
   let loaderDiv = document.getElementById("slider_loader_div");
+  let userImagesButton = document.getElementById("select_files_fake");
   keepBackgroundSettingsOpened(true);
 
   galleriesDiv.classList.add("is-div-hidden");
+  userImagesButton.classList.add("is-button-disabled");
   loaderDiv.classList.remove("is_div-hidden");
 }
 
@@ -57,8 +59,10 @@ function showSlider() {
 export function hideSlider() {
   let galleriesDiv = document.getElementById("background_galleries_div");
   let sliderDiv = document.getElementById("slider_div");
+  let userImagesButton = document.getElementById("select_files_fake");
 
   galleriesDiv.classList.remove("is-div-hidden");
+  userImagesButton.classList.remove("is-button-disabled");
   sliderDiv.classList.add("is-div-hidden");
 }
 
