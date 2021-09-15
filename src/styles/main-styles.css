@@ -275,85 +275,95 @@ a:hover {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  stroke-width: 3;
-  fill: #000028;
-  animation: fill-all 0.2s 2.4s ease-in forwards;
 }
 
 #app_name {
   width: 0;
   transform: translateX(120%);
-  animation: load-name 1s 1.4s ease forwards;
+  height: 90%;
+  fill: #000028;
+  animation: load-name 1000ms 2450ms ease forwards, fill-name 300ms 3450ms ease forwards;
 }
 
-.logo-div {
-  width: 30%;
+#logo_div {
+  width: 40%;
   height: 100%;
   z-index: 50;
+  margin-left: 70px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   background-color: #000028;
 }
-.logo-div #divisory_line {
+#logo_div #divisory_line {
+  position: relative;
+  top: 20px;
   height: 0;
-  animation: load-line 0.5s 0.9s ease forwards;
+  animation: draw-line 500ms 2150ms ease-out forwards;
 }
-.logo-div #app_logo {
-  width: 75%;
+#logo_div #app_logo {
+  width: 80%;
   height: auto;
 }
-.logo-div #app_logo path:nth-child(2) {
-  stroke-dasharray: 384;
-  stroke-dashoffset: 384;
-  animation: animate-logo 0.3s 0.3s ease forwards;
+#logo_div #app_logo #horizontal_lines {
+  stroke: #000028;
+  fill: #000028;
+  animation: draw-rectangles 500ms ease forwards;
 }
-.logo-div #app_logo path:nth-child(3) {
-  stroke-dasharray: 256;
-  stroke-dashoffset: 256;
-  animation: animate-logo 0.3s 0.3s ease forwards;
+#logo_div #app_logo #horizontal_lines #Rectangle_1 {
+  animation: fill-rectangles 500ms 500ms ease forwards;
 }
-.logo-div #app_logo path:nth-child(4) {
-  stroke-dasharray: 518;
-  stroke-dashoffset: 518;
-  animation: animate-logo 0.3s 0.3s ease forwards;
+#logo_div #app_logo #horizontal_lines #Rectangle_2 {
+  animation: fill-rectangles 500ms 1000ms ease forwards;
 }
-.logo-div #app_logo path:nth-child(5) {
-  stroke-dasharray: 518;
-  stroke-dashoffset: 518;
-  animation: animate-logo 0.3s 0.3s ease forwards;
+#logo_div #app_logo #horizontal_lines #Rectangle_3 {
+  animation: fill-rectangles 500ms 1500ms ease forwards;
 }
-.logo-div #app_logo path:nth-child(6) {
-  stroke-dasharray: 544;
-  stroke-dashoffset: 544;
-  animation: animate-logo 0.3s 0.3s ease forwards;
+#logo_div #app_logo #check_down {
+  opacity: 0;
+  animation: draw-checks 350ms 1800ms ease-out forwards;
+}
+#logo_div #app_logo #check_up {
+  opacity: 0;
+  animation: draw-checks 300ms 1500ms ease-in forwards;
 }
 
-.fill-all {
-  fill: none;
-  animation: fill-all 0.2s 2.4s ease-in forwards;
-}
-
-@keyframes animate-logo {
+@keyframes draw-rectangles {
+  from {
+    stroke: #000028;
+  }
   to {
-    stroke-dashoffset: 0;
+    stroke: url(#stroke_lgradient_rectangle);
   }
 }
-@keyframes load-line {
+@keyframes fill-rectangles {
+  from {
+    fill: #000028;
+  }
   to {
-    height: 100%;
+    fill: url(#fill_lgradient_rectangle);
+  }
+}
+@keyframes draw-checks {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes draw-line {
+  to {
+    height: 120%;
   }
 }
 @keyframes load-name {
   to {
     width: 40%;
-    transform: translateX(-10%);
+    transform: translateX(0%);
   }
 }
-@keyframes fill-all {
+@keyframes fill-name {
   to {
-    fill: white;
+    fill: rgba(255, 255, 255, 0.8);
   }
 }
 #arrow_div {
@@ -1048,9 +1058,10 @@ a:hover {
   border-bottom: 2px solid var(--mainBorderColor);
 }
 #task_name_div svg {
-  margin-inline: 1rem;
   width: auto;
-  height: 90%;
+  height: 85%;
+  fill: var(--fontColor);
+  stroke: var(--fontColor);
 }
 
 #task_view_div {

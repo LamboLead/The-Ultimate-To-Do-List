@@ -13,11 +13,11 @@ import ToDo from './logic/to-do.js';
 // Remove page loader
 
 const pageLoader = document.getElementById("loading_screen_div");
-// window.onload = () => {
-//     setTimeout(() => {
-//         pageLoader.style.setProperty("top", "-100vh");
-//     }, 3500);
-// }
+window.onload = () => {
+    setTimeout(() => {
+        pageLoader.style.setProperty("top", "-100vh");
+    }, 3500);
+}
 
 // Set handler for saving information
 

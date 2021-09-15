@@ -24,7 +24,6 @@ class BackgroundManager {
   /**
    * Initializes the functionality by retrieving all background images and animation state from the database and renders them
    * @async
-   * @function initialize
    */
   async initialize() {
     let newImages = await DatabaseInfoModule.retrieveInfo(database, "Custom preferences", {query: "backgroundImages"});
@@ -64,7 +63,6 @@ class BackgroundManager {
 
   /**
    * Changes to and renders specified background image
-   * @function changeBackgroundImage
    */
   changeBackgroundImage() {
     if (!this.backgroundImages) return;

@@ -1,16 +1,25 @@
-$animationLogoDuration: 0.3s
-$animationLogoDelay: 0.15s
-$animationLineDuration: 0.5s
-
-$animationLineDelay: $animationLogoDuration * 3
-$animationNameDuration: 1s
-$animationNameDelay: $animationLineDuration + $animationLineDelay
-
-$animationFillDuration: 0.2s
-$animationFillDelay: $animationNameDuration + $animationNameDelay
-
-$strokeDashArr: (2: 384, 3: 256, 4: 518, 5: 518, 6: 544)
+$loadingBackground: rgb(0, 0, 40)
     
+$drawRectanglesDuration: 500ms
+
+$fillRectanglesDuration: 500ms
+$fillRectangle1Delay: $drawRectanglesDuration // 300ms
+$fillRectangle2Delay: $fillRectangle1Delay + $fillRectanglesDuration // 500ms
+$fillRectangle3Delay: $fillRectangle2Delay + $fillRectanglesDuration // 700ms
+
+$drawCheck1Duration: 300ms
+$drawCheck1Delay: $fillRectangle3Delay
+$drawCheck2Duration: 350ms
+$drawCheck2Delay: $drawCheck1Delay + $drawCheck1Duration
+
+$drawLineDelay: $drawCheck2Delay + $drawCheck2Duration
+$drawLineDuration: 500ms
+
+$drawNameDelay: $drawLineDelay + $drawLineDuration - 200ms
+$drawNameDuration: 1000ms
+$fillNameDelay: $drawNameDelay + $drawNameDuration
+$fillNameDuration: 300ms
+
 #main_logo
     width: 80vw
     height: 50vh
@@ -20,21 +29,20 @@ $strokeDashArr: (2: 384, 3: 256, 4: 518, 5: 518, 6: 544)
     justify-content: center
     align-items: center
 
-    stroke-width: 3
-    fill: rgb(0, 0, 40)
-
-    animation: fill-all $animationFillDuration $animationFillDelay ease-in forwards
+    // border: 3px solid red
 
 #app_name
     width: 0
     transform: translateX(120%)
+    height: 90%
+    fill: $loadingBackground
+    animation: load-name $drawNameDuration $drawNameDelay ease forwards, fill-name $fillNameDuration $fillNameDelay ease forwards
 
-    animation: load-name $animationNameDuration $animationNameDelay ease forwards
-
-.logo-div
-    width: 30%
+#logo_div
+    width: 40%
     height: 100%
     z-index: 50
+    margin-left: 70px
 
     display: flex
     flex-direction: row
@@ -44,37 +52,59 @@ $strokeDashArr: (2: 384, 3: 256, 4: 518, 5: 518, 6: 544)
     background-color: $loadingBackground
 
     #divisory_line
+        position: relative
+        top: 20px
         height: 0
-        animation: load-line $animationLineDuration $animationLineDelay ease forwards
+        animation: draw-line $drawLineDuration $drawLineDelay ease-out forwards
 
     #app_logo
-        width: 75%
+        width: 80%
         height: auto
+        #horizontal_lines
+            stroke: $loadingBackground
+            fill: $loadingBackground
+            animation: draw-rectangles $drawRectanglesDuration ease forwards
 
-    @each $key, $strokeDash in $strokeDashArr
-        #app_logo path:nth-child(#{$key})
-            stroke-dasharray: $strokeDash
-            stroke-dashoffset: $strokeDash
-            animation: animate-logo $animationLogoDuration $animationLogoDelay * 2 ease forwards
+            #Rectangle_1
+                animation: fill-rectangles $fillRectanglesDuration $fillRectangle1Delay ease forwards
+            #Rectangle_2
+                animation: fill-rectangles $fillRectanglesDuration $fillRectangle2Delay ease forwards
+            #Rectangle_3
+                animation: fill-rectangles $fillRectanglesDuration $fillRectangle3Delay ease forwards
 
-.fill-all
-    fill: none
-    animation: fill-all $animationFillDuration $animationFillDelay ease-in forwards
+        #check_down
+            opacity: 0
+            animation: draw-checks $drawCheck2Duration $drawCheck2Delay ease-out forwards
+        #check_up
+            opacity: 0
+            animation: draw-checks $drawCheck1Duration $drawCheck1Delay ease-in forwards
 
-@keyframes animate-logo
+@keyframes draw-rectangles
+    from
+        stroke: $loadingBackground
     to
-        stroke-dashoffset: 0
+        stroke: url(#stroke_lgradient_rectangle)
 
-@keyframes load-line
+@keyframes fill-rectangles
+    from
+        fill: $loadingBackground
     to
-        height: 100%
+        fill: url(#fill_lgradient_rectangle)
+
+@keyframes draw-checks
+    to
+        opacity: 1
+
+
+@keyframes draw-line
+    to
+        height: 120%
 
 @keyframes load-name
     to
         width: 40%
-        transform: translateX(-10%)
+        transform: translateX(0%)
 
-@keyframes fill-all
+@keyframes fill-name
     to
-        fill: rgb(255, 255, 255)
-
+        fill: rgba(255, 255, 255, 0.8)
