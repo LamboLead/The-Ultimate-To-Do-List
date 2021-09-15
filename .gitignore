@@ -1,5 +1,8 @@
 node_modules
-documentation
+documentation/fonts
+documentation/scripts
+documentation/styles
+documentation/*.html
 jsdoc.json
 package-lock.json
 package.json
