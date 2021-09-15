@@ -39,7 +39,7 @@ body {
   background-repeat: no-repeat;
   overflow: hidden;
   animation-name: large-horizontal;
-  animation-duration: 30s;
+  animation-duration: 50s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
   animation-timing-function: ease-in-out;
@@ -350,9 +350,18 @@ a:hover {
     opacity: 1;
   }
 }
-@keyframes draw-line {
-  to {
-    height: 120%;
+@media (min-width: 0px) and (max-width: 500px) {
+  @keyframes draw-line {
+    to {
+      height: 80%;
+    }
+  }
+}
+@media (min-width: 501px) and (max-width: 4000px) {
+  @keyframes draw-line {
+    to {
+      height: 120%;
+    }
   }
 }
 @keyframes load-name {
@@ -810,6 +819,7 @@ a:hover {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  z-index: 10;
   transition: opacity 500ms ease-in;
 }
 

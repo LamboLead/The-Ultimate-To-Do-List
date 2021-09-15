@@ -96,9 +96,16 @@ $fillNameDuration: 300ms
         opacity: 1
 
 
-@keyframes draw-line
-    to
-        height: 120%
+@include screen-width-between($phone...)
+    @keyframes draw-line
+        to
+            height: 80%
+
+@include screen-width-between($desktop...)
+
+    @keyframes draw-line
+        to
+            height: 120%
 
 @keyframes load-name
     to

@@ -91,7 +91,7 @@ export async function showConfirmationDialog(title, info, buttonHandlers) {
       resolve(false);
       confirmationBox.classList.remove("is-confirmation-required");
       showShadowScreen(false);
-    }, 10000)
+    }, 15000)
   });
   return promise.then();
 }

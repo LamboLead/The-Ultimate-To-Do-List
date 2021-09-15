@@ -6,6 +6,7 @@
  */
 
 import BackgroundManager from '../background-manager.js';
+import {popAppear} from '../../../to-do-list/rendering/state-rendering-module.js';
 
 // -> -> -> Functions to show/hide slider <- <- <-
 
@@ -35,7 +36,7 @@ export function showLoader() {
 
   galleriesDiv.classList.add("is-div-hidden");
   userImagesButton.classList.add("is-button-disabled");
-  loaderDiv.classList.remove("is_div-hidden");
+  loaderDiv.classList.remove("is-div-hidden");
 }
 
 /**
@@ -139,13 +140,14 @@ export function setUpSlider(whichGallery, imagesArr) {
   Array.from(sliderImagesContainer.children).forEach(image => {
     image.onload = () => {
       loadedImages++;
-      console.log(loadedImages, "image has loaded!");
+      // console.log(loadedImages, "image has loaded!");
       if (loadedImages === imagesArr.length) {
         changeSliderTitle(whichGallery);
         updateSlider();
         moveToImageInSlider(1);
         keepBackgroundSettingsOpened(false);
         showSlider();
+        popAppear("Images loaded successfully");
       };
     }
   });
@@ -259,4 +261,5 @@ export function setFetchedImagesAsBackground() {
   slider.images.pop();
   slider.images.shift();
   BackgroundManager.setImagesAsBackground(slider.images);
+  popAppear("Images set as background");
 }

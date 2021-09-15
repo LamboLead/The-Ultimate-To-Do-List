@@ -10,28 +10,26 @@ import * as EventHandlingModule from '../dom-element-handler.js';
 import * as StateRenderingModule from '../to-do-list/rendering/state-rendering-module.js';
 import ToDo from './logic/to-do.js';
 
-// Remove page loader
-
-const pageLoader = document.getElementById("loading_screen_div");
-window.onload = () => {
-    setTimeout(() => {
-        pageLoader.style.setProperty("top", "-100vh");
-    }, 3500);
-}
-
-// Set handler for saving information
+// Remove page loader and set MutationObserver
 
 let onSave = false;
 const listContainer = document.getElementById("list_div");
 const saveObserver = new MutationObserver(saveDataHandler);
-saveObserver.observe(listContainer, {
-  subtree: true,
-  childList: true,
-  attributeFilter: ["value", "checked"]
-});
+
+const pageLoader = document.getElementById("loading_screen_div");
+window.onload = () => {
+  setTimeout(() => {
+      pageLoader.style.setProperty("top", "-100vh");
+      saveObserver.observe(listContainer, {
+        subtree: true,
+        childList: true,
+        attributeFilter: ["value", "checked"]
+      }); // Start observing after all elements have been rendered
+  }, 4000);
+}
 
 export function saveDataHandler(mutationsList) {
-  console.log(mutationsList);
+  // console.log(mutationsList);
   if (!onSave) {
     onSave = true;
     setTimeout(() => {
@@ -66,6 +64,7 @@ new Sortable.create(listBox, {
 EventHandlingModule.handleUserInput("#insert_task", createTask, undefined, true);
 EventHandlingModule.handleUserInput("#list_name", (newName) => {
   ToDo.updateListName(newName);
+  StateRenderingModule.popAppear("Updated list name");
 });
 
 let clearInputButton = document.getElementById("clear_input_button");
@@ -86,6 +85,7 @@ function createTask(taskName) {
     ToDo.createList();
   }
   ToDo.currentList.createTask(taskName);
+  StateRenderingModule.popAppear("Task created");
 }
 
 export function deleteTask(taskId) {
@@ -96,10 +96,12 @@ export function deleteTask(taskId) {
   });
 
   ToDo.currentList.deleteTask(taskId);
+  StateRenderingModule.popAppear("Task deleted")
 }
 
 export function editTask(inputValue, taskId) {
   ToDo.currentList.editTask(taskId, inputValue);
+  StateRenderingModule.popAppear("Task edited");
 }
 
 export function checkTask(taskId) {
@@ -128,11 +130,13 @@ createListButton.addEventListener("click", () => {
   setTimeout(() => {
     createListButton.classList.remove("is-button-disabled");
   }, 1100);
+  StateRenderingModule.popAppear("New list created")
 });
 
 export function switchToList(listId) {
   if (ToDo.currentList.id === listId) return;
   ToDo.switchToList(listId);
+  StateRenderingModule.popAppear("Switched to list");
 }
 
 export async function deleteList(listId, listName) {
@@ -141,11 +145,12 @@ export async function deleteList(listId, listName) {
     `Do you want to delete '${listName}'?`,
     [
       {buttonName: "Delete list", color: "var(--clear)", returnValue: true},
-      {buttonName: "Cancel", color: "default", returnValue: false}
+      {buttonName: "Cancel", color: "var(--fontColor)", returnValue: false}
     ]
   );
   if (!returnValue) return;
   ToDo.deleteList(listId);
+  StateRenderingModule.popAppear("List deleted")
 }
 
 export function watchListOrder() {
@@ -162,10 +167,3 @@ function watchElementsOrder(elementsQuerySelector, attributeName) {
   });
   return elementsOrder;
 }
-
-let arrow = document.getElementById("arrow_div");
-arrow.addEventListener("click", () => {
-  console.log(ToDo.currentListIndex);
-  console.log(ToDo.currentList);
-  console.log(ToDo.lists);
-});

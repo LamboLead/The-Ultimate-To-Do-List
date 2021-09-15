@@ -27,14 +27,15 @@ class BackgroundManager {
    */
   async initialize() {
     let newImages = await DatabaseInfoModule.retrieveInfo(database, "Custom preferences", {query: "backgroundImages"});
+    // console.log(newImages);
     this.animations = (await DatabaseInfoModule.retrieveInfo(database, "Custom preferences", {query: "animations"}))[0];
     
-    if (newImages.length === 0) {
-      console.log("No images whatsoever!");
-    }
-    if (!this.animations) {
+    if (this.animations === undefined) {
       this.animations = true;
       DatabaseInfoModule.saveInfo(database, "Custom preferences", {key: "animations", value: this.animations});
+    }
+    if (newImages.length === 0 || !newImages[0]) {
+      console.log("No images whatsoever!");
       return;
     }
 

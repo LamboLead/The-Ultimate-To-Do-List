@@ -2,6 +2,7 @@ import * as ImageProcessingModule from './image-processing/image-processing-modu
 import * as EventHandlingModule from '../../dom-element-handler.js';
 import BackgroundManager from "./background-manager.js";
 import * as SliderRenderingModule from "./rendering-module/slider-rendering-module.js";
+import {popAppear} from '../../to-do-list/rendering/state-rendering-module.js';
 
 // Set up animationiteration event listener for image changing
 const body = document.querySelector("body");
@@ -18,6 +19,7 @@ fileButton.addEventListener("change", async () => {
   let files = fileButton.files;
   let images = await ImageProcessingModule.processUserImages(files);
   BackgroundManager.setImagesAsBackground(images);
+  popAppear("Images set as background");
 });
 
 // Set up animation switch
