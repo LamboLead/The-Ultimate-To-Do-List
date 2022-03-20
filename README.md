@@ -1,9 +1,9 @@
 # The Ultimate To-do List
 
-![release](https://img.shields.io/github/v/release/LamboLead/the-ultimate-to-do-list-v2?color=blue)
+![release](https://img.shields.io/github/v/release/LamboLead/The-Ultimate-To-Do-List)
 ![last-commited](https://img.shields.io/github/last-commit/LamboLead/the-ultimate-to-do-list-v2?color=blue)
 ![contributors](https://img.shields.io/github/contributors/LamboLead/the-ultimate-to-do-list-v2?color=green)
-![license](https://img.shields.io/github/license/LamboLead/the-ultimate-to-do-list-v2?color=green)
+![license](https://img.shields.io/github/license/LamboLead/The-Ultimate-To-Do-List)
 
 ![TUTDL logo](./documentation/readme-images/start-logo.gif)
 

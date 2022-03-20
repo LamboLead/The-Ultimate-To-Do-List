@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"js/ts.implicitProjectConfig.checkJs": true,
+		"liveServer.settings.port": 5501
+	}
+}

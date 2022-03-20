@@ -1,9 +1,3 @@
 node_modules
-documentation/fonts
-documentation/scripts
-documentation/styles
-documentation/*.html
-jsdoc.json
-package-lock.json
-package.json
-*.code-workspace
+documentation
+ssl

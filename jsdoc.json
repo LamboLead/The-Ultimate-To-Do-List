@@ -1,0 +1,21 @@
+{
+  "plugins": [],
+  "source": {
+    "include": ["src/index.js", "src/js"],
+    "includePattern": ".js$",
+    "excludePattern": "(node_modules|documentation)"
+  },
+  "templates": {
+    "cleverLinks": true,
+    "monospaceLinks": true
+  },
+  "opts": {
+    "recurse": "true",
+    "destination": "./documentation",
+    "template": "node_modules/clean-jsdoc-theme",
+    "theme_opts": {
+      "theme": "dark"
+    },
+    "readme": "documentation/documentation-readme.md"
+  }
+}
